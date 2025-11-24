@@ -3,17 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="NOVAR Web - Educational Platform. Download the NOVAR app and access personalized learning paths, interactive content, and collaborative tools.">
     <title>NOVAR Web - Educational Platform</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- External Stylesheets -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#14B8A6',
-                        secondary: '#10B981',
-                        dark: '#1F2937',
+                        primary: '#000000',
+                        secondary: '#6B7280',
+                        dark: '#000000',
                         light: '#F9FAFB'
                     },
                     animation: {
@@ -26,163 +32,270 @@
             }
         }
     </script>
-    <style>
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        .gradient-text {
-            background: linear-gradient(135deg, #14B8A6 0%, #0D9488 50%, #10B981 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .glass {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        .card-hover {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .card-hover:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(20, 184, 166, 0.2);
-        }
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease-out;
-        }
-        .animate-on-scroll.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
 </head>
 <body class="bg-light text-dark font-sans overflow-x-hidden">
     <!-- Navigation -->
-    <nav class="glass bg-white/80 backdrop-blur-lg shadow-lg fixed w-full z-10 border-b border-white/20">
+    <nav id="main-nav" class="nav-glass fixed w-full z-50">
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center py-4">
                 <div class="flex items-center group cursor-pointer">
-                    <i class="fas fa-graduation-cap text-primary text-2xl mr-2 transition-transform group-hover:scale-110 group-hover:rotate-12"></i>
-                    <span class="text-xl font-bold bg-gradient-to-r from-primary to-teal-600 bg-clip-text text-transparent">NOVAR Web</span>
+                    <img src="assets/novar.png" alt="NOVAR Logo" class="h-8 w-auto object-contain">
                 </div>
                 
                 <!-- Mobile menu button -->
                 <div class="md:hidden">
-                    <button id="mobile-menu-button" class="text-dark focus:outline-none">
-                        <i class="fas fa-bars text-xl"></i>
+                    <button id="mobile-menu-button" class="hamburger focus:outline-none" aria-label="Toggle menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
                     </button>
                 </div>
                 
                 <!-- Desktop menu -->
                 <div class="hidden md:flex space-x-8">
-                    <a href="#purpose" class="text-dark hover:text-primary transition-all relative group">
+                    <a href="#purpose" class="text-dark hover:text-gray-600 transition-all relative group">
                         Purpose
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-dark transition-all group-hover:w-full"></span>
                     </a>
-                    <a href="#download" class="text-dark hover:text-primary transition-all relative group">
+                    <a href="#download" class="text-dark hover:text-gray-600 transition-all relative group">
                         Download
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-dark transition-all group-hover:w-full"></span>
                     </a>
-                    <a href="#features" class="text-dark hover:text-primary transition-all relative group">
+                    <a href="#features" class="text-dark hover:text-gray-600 transition-all relative group">
                         Features
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-dark transition-all group-hover:w-full"></span>
                     </a>
-                    <a href="#contact" class="text-dark hover:text-primary transition-all relative group">
+                    <a href="#contact" class="text-dark hover:text-gray-600 transition-all relative group">
                         Contact
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-dark transition-all group-hover:w-full"></span>
+                    </a>
+                    <a href="#donate" class="text-dark hover:text-gray-600 transition-all relative group">
+                        Donate
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-dark transition-all group-hover:w-full"></span>
                     </a>
                 </div>
-            </div>
-            
-            <!-- Mobile menu -->
-            <div id="mobile-menu" class="hidden md:hidden pb-4">
-                <a href="#purpose" class="block py-2 text-dark hover:text-primary transition">Purpose</a>
-                <a href="#download" class="block py-2 text-dark hover:text-primary transition">Download</a>
-                <a href="#features" class="block py-2 text-dark hover:text-primary transition">Features</a>
-                <a href="#contact" class="block py-2 text-dark hover:text-primary transition">Contact</a>
             </div>
         </div>
     </nav>
 
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu md:hidden">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-8">
+                <div class="flex items-center">
+                    <img src="assets/novar.png" alt="NOVAR Logo" class="h-8 w-auto object-contain">
+                </div>
+            </div>
+            
+            <nav class="space-y-2">
+                <a href="#purpose" class="mobile-menu-item block py-4 px-4 text-dark text-lg font-medium rounded-xl hover:bg-gray-100 transition-all duration-200 active:bg-gray-200">
+                    <div class="flex items-center">
+                        <i class="fas fa-bullseye mr-3 text-gray-600"></i>
+                        <span>Purpose</span>
+                    </div>
+                </a>
+                <a href="#download" class="mobile-menu-item block py-4 px-4 text-dark text-lg font-medium rounded-xl hover:bg-gray-100 transition-all duration-200 active:bg-gray-200">
+                    <div class="flex items-center">
+                        <i class="fas fa-download mr-3 text-gray-600"></i>
+                        <span>Download</span>
+                    </div>
+                </a>
+                <a href="#features" class="mobile-menu-item block py-4 px-4 text-dark text-lg font-medium rounded-xl hover:bg-gray-100 transition-all duration-200 active:bg-gray-200">
+                    <div class="flex items-center">
+                        <i class="fas fa-star mr-3 text-gray-600"></i>
+                        <span>Features</span>
+                    </div>
+                </a>
+                <a href="#contact" class="mobile-menu-item block py-4 px-4 text-dark text-lg font-medium rounded-xl hover:bg-gray-100 transition-all duration-200 active:bg-gray-200">
+                    <div class="flex items-center">
+                        <i class="fas fa-envelope mr-3 text-gray-600"></i>
+                        <span>Contact</span>
+                    </div>
+                </a>
+                <a href="#donate" class="mobile-menu-item block py-4 px-4 text-dark text-lg font-medium rounded-xl hover:bg-gray-100 transition-all duration-200 active:bg-gray-200">
+                    <div class="flex items-center">
+                        <i class="fas fa-heart mr-3 text-gray-600"></i>
+                        <span>Donate</span>
+                    </div>
+                </a>
+            </nav>
+        </div>
+    </div>
+
     <!-- Hero Section -->
-    <section class="pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-r from-primary via-teal-500 to-teal-600 text-white relative overflow-hidden">
-        <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.05"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
-        <div class="container mx-auto px-4 text-center relative z-10">
-            <h1 class="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
-                Transform Your <span class="gradient-text bg-gradient-to-r from-white to-teal-100 bg-clip-text text-transparent">Learning Experience</span>
-            </h1>
-            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto opacity-90 animate-slide-up">NOVAR Web brings interactive education to your fingertips with cutting-edge technology and personalized learning paths.</p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4 animate-slide-up">
-                <a href="#download" class="bg-secondary hover:bg-green-500 text-white font-bold py-3 px-8 rounded-xl transition-all duration-300 shadow-lg hover:shadow-2xl hover:scale-105 transform">
-                    Get Started <i class="fas fa-arrow-right ml-2"></i>
-                </a>
-                <a href="#purpose" class="bg-white/10 backdrop-blur-sm border-2 border-white/30 hover:bg-white hover:text-primary text-white font-bold py-3 px-8 rounded-xl transition-all duration-300 shadow-lg hover:shadow-2xl hover:scale-105 transform">
-                    Learn More
-                </a>
+    <section id="download" class="pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"0.05\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Text Content -->
+                <div class="text-center lg:text-left">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
+                        It's more <span class="text-white">than just learning</span>
+                    </h1>
+                    <p class="text-xl md:text-2xl mb-8 opacity-90 animate-slide-up">Redifining access.</p>
+                    
+                    <!-- Download Buttons -->
+                    <div class="mb-8 animate-slide-up">
+                        <p class="text-base md:text-lg mb-4 text-center lg:text-left font-bold text-white tracking-tight uppercase letter-spacing-wider">Download NOVAR app now</p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start download-buttons-container">
+                            <button type="button" id="ios-download-btn" class="download-btn text-dark font-semibold py-4 px-6 rounded-2xl flex items-center justify-center group min-w-[180px] sm:min-w-[200px]">
+                                <i class="fab fa-apple download-btn-icon text-3xl mr-4"></i>
+                                <div class="text-left download-btn-text flex-1">
+                                    <div class="text-xs opacity-70 font-normal leading-tight mb-0.5">Download on the</div>
+                                    <div class="font-bold text-base leading-tight">App Store</div>
+                                </div>
+                            </button>
+                            <a href="https://play.google.com/store/apps/details?id=com.k2024009747.novar&hl=en_ZA" target="_blank" rel="noopener noreferrer" class="download-btn text-dark font-semibold py-4 px-6 rounded-2xl flex items-center justify-center group min-w-[180px] sm:min-w-[200px]">
+                                <i class="fab fa-google-play download-btn-icon text-2xl mr-4"></i>
+                                <div class="text-left download-btn-text flex-1">
+                                    <div class="text-xs opacity-70 font-normal leading-tight mb-0.5">Get it on</div>
+                                    <div class="font-bold text-base leading-tight">Google Play</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4 animate-slide-up justify-center lg:justify-start">
+                        <a href="#purpose" class="bg-white/10 backdrop-blur-sm border-2 border-white/30 hover:bg-white hover:text-dark active:bg-white/20 text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 shadow-lg hover:shadow-2xl active:scale-95 transform text-center">
+                            Learn More
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- App Screenshot -->
+                <div class="flex justify-center lg:justify-end phone-mockup animate-slide-up">
+                    <div class="phone-mockup-inner">
+                        <div class="relative">
+                            <!-- Phone Frame -->
+                            <div class="bg-dark w-72 h-[600px] rounded-[3rem] p-3 shadow-2xl">
+                                <!-- Notch -->
+                                <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-6 bg-dark rounded-b-2xl z-10"></div>
+                                
+                                <!-- Screen -->
+                                <div class="bg-white w-full h-full rounded-[2.5rem] overflow-hidden relative">
+                                    <!-- Status Bar -->
+                                    <div class="bg-gradient-to-br from-gray-800 to-black px-6 py-2 flex justify-between items-center text-white text-xs">
+                                        <span>9:41</span>
+                                        <div class="flex items-center gap-1">
+                                            <i class="fas fa-signal text-xs"></i>
+                                            <i class="fas fa-wifi text-xs"></i>
+                                            <i class="fas fa-battery-three-quarters text-xs"></i>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- App Content - Logo Centered -->
+                                    <div class="h-full bg-white flex items-center justify-center">
+                                        <div class="text-center px-6">
+                                            <img src="assets/NOVAR logo.jpeg" alt="NOVAR App Logo" class="w-64 h-72 md:w-72 md:h-80 mx-auto object-contain scale-110">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Decorative Glow -->
+                            <div class="absolute -inset-4 bg-gradient-to-r from-white/10 to-transparent rounded-[3rem] blur-2xl -z-10"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Purpose Section -->
-    <section id="purpose" class="py-20 bg-white">
+    <section id="purpose" class="py-16 md:py-24 bg-gradient-to-b from-white via-gray-50 to-white">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-on-scroll">
-                Purpose of <span class="gradient-text">NOVAR Web</span>
-            </h2>
+            <!-- Header -->
+            <div class="text-center mb-16 animate-on-scroll">
+                <span class="purpose-badge mb-4 inline-block">
+                    <i class="fas fa-info-circle mr-2"></i>
+                    About NOVAR
+                </span>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    Purpose of <span class="gradient-text">NOVAR Web</span>
+                </h2>
+                <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
+                    NOVAR Web serves as the informational hub for the NOVAR app, providing essential details and resources that complement the mobile experience.
+                </p>
+            </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                <div class="animate-on-scroll">
-                    <h3 class="text-2xl font-bold mb-4 text-primary flex items-center">
-                        <i class="fas fa-bullseye mr-3 text-secondary"></i>
-                        Our Mission
-                    </h3>
-                    <p class="text-lg mb-6 leading-relaxed">NOVAR Web was created to bridge educational gaps and make quality learning accessible to everyone, regardless of location or background.</p>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-start">
+                <!-- Left Content -->
+                <div class="space-y-8 animate-on-scroll">
+                    <!-- Mission Card -->
+                    <div class="purpose-card rounded-3xl p-6 md:p-8">
+                        <div class="flex items-start mb-6">
+                            <div class="purpose-icon-wrapper w-14 h-14 rounded-2xl flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-bullseye text-white text-xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-2xl md:text-3xl font-bold mb-3 text-dark">Our Mission</h3>
+                                <p class="text-base md:text-lg leading-relaxed text-gray-700">
+                                    NOVAR Web was created to bridge educational gaps and make quality learning accessible to everyone, regardless of location or background.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                     
-                    <h3 class="text-2xl font-bold mb-4 text-primary flex items-center mt-8">
-                        <i class="fas fa-star mr-3 text-secondary"></i>
-                        What We Offer
-                    </h3>
-                    <ul class="space-y-4">
-                        <li class="flex items-start group">
-                            <i class="fas fa-check-circle text-secondary mt-1 mr-3 text-xl group-hover:scale-125 transition-transform"></i>
-                            <span class="text-gray-700">Personalized learning paths based on individual strengths and weaknesses</span>
-                        </li>
-                        <li class="flex items-start group">
-                            <i class="fas fa-check-circle text-secondary mt-1 mr-3 text-xl group-hover:scale-125 transition-transform"></i>
-                            <span class="text-gray-700">Interactive content including videos, quizzes, and simulations</span>
-                        </li>
-                        <li class="flex items-start group">
-                            <i class="fas fa-check-circle text-secondary mt-1 mr-3 text-xl group-hover:scale-125 transition-transform"></i>
-                            <span class="text-gray-700">Progress tracking and analytics for students and educators</span>
-                        </li>
-                        <li class="flex items-start group">
-                            <i class="fas fa-check-circle text-secondary mt-1 mr-3 text-xl group-hover:scale-125 transition-transform"></i>
-                            <span class="text-gray-700">Collaborative tools for group projects and peer learning</span>
-                        </li>
-                    </ul>
+                    <!-- What We Offer Card -->
+                    <div class="purpose-card rounded-3xl p-6 md:p-8">
+                        <div class="flex items-start mb-6">
+                            <div class="purpose-icon-wrapper w-14 h-14 rounded-2xl flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-star text-white text-xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-2xl md:text-3xl font-bold mb-6 text-dark">What We Offer</h3>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div class="purpose-feature-item rounded-2xl p-5 flex items-start group">
+                                <div class="w-10 h-10 rounded-xl bg-dark flex items-center justify-center mr-4 flex-shrink-0 group-hover:scale-110 transition-transform">
+                                    <i class="fas fa-check text-white text-sm"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-bold text-gray-900 mb-1">Personalized Learning Paths</h4>
+                                    <p class="text-sm md:text-base text-gray-600 leading-relaxed">Customized learning experiences tailored to your interests and grade-level subjects, ensuring a personalized educational journey that adapts to your unique needs.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="purpose-feature-item rounded-2xl p-5 flex items-start group">
+                                <div class="w-10 h-10 rounded-xl bg-gray-700 flex items-center justify-center mr-4 flex-shrink-0 group-hover:scale-110 transition-transform">
+                                    <i class="fas fa-check text-white text-sm"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-bold text-gray-900 mb-1">Interactive Content</h4>
+                                    <p class="text-sm md:text-base text-gray-600 leading-relaxed">Engage with content creator pages, explore a structured resource hub, access a comprehensive library of books and study guides, watch short educational videos for learning and motivation, and much more to enhance your educational journey.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="purpose-feature-item rounded-2xl p-5 flex items-start group">
+                                <div class="w-10 h-10 rounded-xl bg-dark flex items-center justify-center mr-4 flex-shrink-0 group-hover:scale-110 transition-transform">
+                                    <i class="fas fa-check text-white text-sm"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-bold text-gray-900 mb-1">Collaborative Tools</h4>
+                                    <p class="text-sm md:text-base text-gray-600 leading-relaxed">Utilize study timers, set target marks that automatically calculate recommended daily study time, customize your own courses, and compete on the top student leaderboard to stay motivated and track your progress.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="bg-gradient-to-br from-light to-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 animate-on-scroll animate-float">
-                    <div class="overflow-hidden rounded-xl">
-                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Students collaborating" class="rounded-xl shadow-lg w-full transform hover:scale-105 transition-transform duration-500">
+                <!-- Right Image -->
+                <div class="animate-on-scroll">
+                    <div class="purpose-card rounded-3xl p-6 md:p-8 h-full">
+                        <div class="purpose-image-wrapper rounded-2xl overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Students collaborating" class="w-full h-auto rounded-2xl transform hover:scale-105 transition-transform duration-700">
+                        </div>
+                        <div class="mt-6 text-center">
+                            <p class="text-gray-600 text-sm md:text-base italic">
+                                "Empowering learners worldwide through accessible education"
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -190,220 +303,256 @@
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="py-20 bg-gradient-to-b from-light to-white">
+    <section id="features" class="py-16 md:py-24 bg-gradient-to-b from-white via-gray-50 to-white">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 animate-on-scroll">
-                Key <span class="gradient-text">Features</span>
-            </h2>
-            <p class="text-xl text-center mb-12 max-w-2xl mx-auto text-gray-600 animate-on-scroll">Designed to enhance the learning experience for students and educators alike</p>
+            <!-- Header -->
+            <div class="text-center mb-16 animate-on-scroll">
+                <span class="purpose-badge mb-4 inline-block">
+                    <i class="fas fa-star mr-2"></i>
+                    Core Features
+                </span>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    Key <span class="gradient-text">Features</span>
+                </h2>
+                <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
+                    Discover the powerful features that make NOVAR app an exceptional learning platform
+                </p>
+            </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white p-8 rounded-2xl shadow-lg card-hover border border-gray-100 animate-on-scroll">
-                    <div class="bg-gradient-to-br from-primary to-teal-600 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 shadow-lg transform hover:rotate-6 transition-transform">
+            <!-- Features Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                <!-- Feature 1: Personalized Learning Paths -->
+                <div class="feature-card rounded-3xl p-6 md:p-8 animate-on-scroll">
+                    <div class="feature-icon-wrapper w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
                         <i class="fas fa-user-graduate text-white text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-gray-800">Personalized Learning</h3>
-                    <p class="text-gray-600 leading-relaxed">Adaptive algorithms create custom learning paths based on your progress, strengths, and areas for improvement.</p>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-900">Personalized Learning Paths</h3>
+                    <p class="text-base md:text-lg text-gray-600 leading-relaxed">
+                        Customized learning experiences tailored to your interests and grade-level subjects, ensuring a personalized educational journey that adapts to your unique needs.
+                    </p>
                 </div>
                 
-                <div class="bg-white p-8 rounded-2xl shadow-lg card-hover border border-gray-100 animate-on-scroll">
-                    <div class="bg-gradient-to-br from-secondary to-green-500 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 shadow-lg transform hover:rotate-6 transition-transform">
-                        <i class="fas fa-chart-line text-white text-2xl"></i>
+                <!-- Feature 2: Interactive Content -->
+                <div class="feature-card rounded-3xl p-6 md:p-8 animate-on-scroll">
+                    <div class="feature-icon-wrapper w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-play-circle text-white text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-gray-800">Progress Analytics</h3>
-                    <p class="text-gray-600 leading-relaxed">Track your learning journey with detailed analytics and insights to optimize your study habits.</p>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-900">Interactive Content</h3>
+                    <p class="text-base md:text-lg text-gray-600 leading-relaxed">
+                        Engage with content creator pages, explore a structured resource hub, access a comprehensive library of books and study guides, watch short educational videos for learning and motivation, and much more.
+                    </p>
                 </div>
                 
-                <div class="bg-white p-8 rounded-2xl shadow-lg card-hover border border-gray-100 animate-on-scroll">
-                    <div class="bg-gradient-to-br from-primary to-teal-500 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 shadow-lg transform hover:rotate-6 transition-transform">
+                <!-- Feature 3: Collaborative Tools -->
+                <div class="feature-card rounded-3xl p-6 md:p-8 animate-on-scroll">
+                    <div class="feature-icon-wrapper w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
                         <i class="fas fa-users text-white text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-gray-800">Collaborative Tools</h3>
-                    <p class="text-gray-600 leading-relaxed">Work together with peers on projects, share notes, and participate in group discussions.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Download Section -->
-    <section id="download" class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Download Our App</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                <div>
-                    <h3 class="text-2xl font-bold mb-4 text-primary">Available on All Platforms</h3>
-                    <p class="text-lg mb-6">Access NOVAR Web on your preferred device - smartphone, tablet, or desktop. Our app syncs seamlessly across all your devices.</p>
-                    
-                    <div class="flex flex-col sm:flex-row gap-4 mb-8">
-                        <a href="#" class="bg-dark text-white py-4 px-6 rounded-xl flex items-center justify-center transition-all hover:bg-gray-800 shadow-lg hover:shadow-xl hover:scale-105 transform group">
-                            <i class="fab fa-apple text-2xl mr-3 group-hover:scale-110 transition-transform"></i>
-                            <div class="text-left">
-                                <div class="text-xs opacity-80">Download on the</div>
-                                <div class="font-bold">App Store</div>
-                            </div>
-                        </a>
-                        
-                        <a href="#" class="bg-dark text-white py-4 px-6 rounded-xl flex items-center justify-center transition-all hover:bg-gray-800 shadow-lg hover:shadow-xl hover:scale-105 transform group">
-                            <i class="fab fa-google-play text-xl mr-3 group-hover:scale-110 transition-transform"></i>
-                            <div class="text-left">
-                                <div class="text-xs opacity-80">Get it on</div>
-                                <div class="font-bold">Google Play</div>
-                            </div>
-                        </a>
-                    </div>
-                    
-                    <div class="bg-light p-4 rounded-lg">
-                        <h4 class="font-bold mb-2">System Requirements</h4>
-                        <ul class="text-sm space-y-1">
-                            <li>• iOS 12.0 or later / Android 8.0 or later</li>
-                            <li>• 500MB free storage space</li>
-                            <li>• Internet connection for full functionality</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="flex justify-center">
-                    <div class="relative">
-                        <div class="bg-primary w-64 h-96 rounded-3xl shadow-2xl flex items-center justify-center">
-                            <div class="bg-white w-56 h-88 rounded-2xl overflow-hidden relative">
-                                <!-- Mock phone screen content -->
-                                <div class="h-1/3 bg-gradient-to-r from-primary to-teal-500 p-4 text-white">
-                                    <div class="flex items-center mb-4">
-                                        <i class="fas fa-graduation-cap text-white text-xl mr-2"></i>
-                                        <span class="font-bold">NOVAR Web</span>
-                                    </div>
-                                    <h3 class="text-lg font-bold">Welcome back, Student!</h3>
-                                </div>
-                                <div class="p-4">
-                                    <div class="bg-light rounded-lg p-3 mb-3 flex items-center">
-                                        <div class="bg-secondary w-10 h-10 rounded-full flex items-center justify-center mr-3">
-                                            <i class="fas fa-book text-white"></i>
-                                        </div>
-                                        <div>
-                                            <div class="font-bold">Mathematics</div>
-                                            <div class="text-xs text-gray-500">Continue learning</div>
-                                        </div>
-                                    </div>
-                                    <div class="bg-light rounded-lg p-3 mb-3 flex items-center">
-                                        <div class="bg-primary w-10 h-10 rounded-full flex items-center justify-center mr-3">
-                                            <i class="fas fa-flask text-white"></i>
-                                        </div>
-                                        <div>
-                                            <div class="font-bold">Science</div>
-                                            <div class="text-xs text-gray-500">New assignment</div>
-                                        </div>
-                                    </div>
-                                    <div class="bg-light rounded-lg p-3 flex items-center">
-                                        <div class="bg-teal-500 w-10 h-10 rounded-full flex items-center justify-center mr-3">
-                                            <i class="fas fa-globe text-white"></i>
-                                        </div>
-                                        <div>
-                                            <div class="font-bold">Languages</div>
-                                            <div class="text-xs text-gray-500">Quiz available</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-900">Collaborative Tools</h3>
+                    <p class="text-base md:text-lg text-gray-600 leading-relaxed">
+                        Utilize study timers, set target marks that automatically calculate recommended daily study time, customize your own courses, and compete on the top student leaderboard to stay motivated and track your progress.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-16 bg-light">
+    <section id="contact" class="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Contact Us</h2>
+            <!-- Header -->
+            <div class="text-center mb-16 animate-on-scroll">
+                <span class="purpose-badge mb-4 inline-block">
+                    <i class="fas fa-envelope mr-2"></i>
+                    Get In Touch
+                </span>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    Contact <span class="gradient-text">Us</span>
+                </h2>
+                <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
+                    Have questions about NOVAR Web? Our team is here to help you with any inquiries about our platform, features, or implementation.
+                </p>
+            </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <div>
-                    <h3 class="text-2xl font-bold mb-6 text-primary">Get In Touch</h3>
-                    <p class="mb-6">Have questions about NOVAR Web? Our team is here to help you with any inquiries about our platform, features, or implementation.</p>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
+                <!-- Contact Information -->
+                <div class="contact-card rounded-3xl p-6 md:p-8 animate-on-scroll">
+                    <h3 class="text-2xl md:text-3xl font-bold mb-6 text-dark flex items-center">
+                        <div class="purpose-icon-wrapper w-12 h-12 rounded-xl flex items-center justify-center mr-4">
+                            <i class="fas fa-headset text-white"></i>
+                        </div>
+                        Contact Information
+                    </h3>
                     
-                    <div class="space-y-4">
-                        <div class="flex items-start">
-                            <i class="fas fa-map-marker-alt text-primary mt-1 mr-4"></i>
+                    <div class="space-y-6">
+                        <div class="contact-info-item flex items-start p-4 rounded-xl bg-white/50">
+                            <div class="contact-icon w-12 h-12 rounded-xl bg-gray-700 flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-phone-alt text-white"></i>
+                            </div>
                             <div>
-                                <h4 class="font-bold">Address</h4>
-                                <p>123 Education Street, Learning City, LC 56789</p>
+                                <h4 class="font-bold text-gray-900 mb-1">Phone</h4>
+                                <p class="text-gray-600">+27 (63) 488-8362</p>
+                                <p class="text-gray-600">+27 (78) 127-1344</p>
                             </div>
                         </div>
                         
-                        <div class="flex items-start">
-                            <i class="fas fa-phone-alt text-primary mt-1 mr-4"></i>
-                            <div>
-                                <h4 class="font-bold">Phone</h4>
-                                <p>+1 (555) 123-4567</p>
+                        <div class="contact-info-item flex items-start p-4 rounded-xl bg-white/50">
+                            <div class="contact-icon w-12 h-12 rounded-xl bg-gray-600 flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-envelope text-white"></i>
                             </div>
-                        </div>
-                        
-                        <div class="flex items-start">
-                            <i class="fas fa-envelope text-primary mt-1 mr-4"></i>
                             <div>
-                                <h4 class="font-bold">Email</h4>
-                                <p>support@edulearn.com</p>
+                                <h4 class="font-bold text-gray-900 mb-1">Email</h4>
+                                <p class="text-gray-600">support@novarapp.com</p>
                             </div>
-                        </div>
-                        
-                        <div class="flex items-start">
-                            <i class="fas fa-clock text-primary mt-1 mr-4"></i>
-                            <div>
-                                <h4 class="font-bold">Support Hours</h4>
-                                <p>Monday - Friday: 9:00 AM - 6:00 PM EST</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="mt-8">
-                        <h4 class="font-bold mb-4">Follow Us</h4>
-                        <div class="flex space-x-4">
-                            <a href="#" class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-teal-700 transition">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a href="#" class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-teal-700 transition">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a href="#" class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-teal-700 transition">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                            <a href="#" class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-teal-700 transition">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
                         </div>
                     </div>
                 </div>
                 
-                <div class="bg-white p-8 rounded-2xl shadow-xl border border-gray-100">
-                    <h3 class="text-2xl font-bold mb-6 text-primary flex items-center">
-                        <i class="fas fa-paper-plane mr-3 text-secondary"></i>
+                <!-- Contact Form -->
+                <div class="contact-card rounded-3xl p-6 md:p-8 animate-on-scroll">
+                    <h3 class="text-2xl md:text-3xl font-bold mb-6 text-dark flex items-center">
+                        <div class="purpose-icon-wrapper w-12 h-12 rounded-xl flex items-center justify-center mr-4">
+                            <i class="fas fa-paper-plane text-white"></i>
+                        </div>
                         Send Us a Message
                     </h3>
-                    <form>
-                        <div class="mb-5">
-                            <label class="block text-gray-700 mb-2 font-semibold" for="name">Full Name</label>
-                            <input class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" type="text" id="name" placeholder="Your name">
+                    <form class="space-y-5">
+                        <div>
+                            <label class="block text-gray-900 mb-2 font-semibold text-sm" for="name">Full Name</label>
+                            <input class="w-full px-4 py-3.5 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-dark focus:border-transparent transition-all text-gray-900 placeholder-gray-400" type="text" id="name" placeholder="Enter your name">
                         </div>
                         
-                        <div class="mb-5">
-                            <label class="block text-gray-700 mb-2 font-semibold" for="email">Email Address</label>
-                            <input class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" type="email" id="email" placeholder="Your email">
+                        <div>
+                            <label class="block text-gray-900 mb-2 font-semibold text-sm" for="email">Email Address</label>
+                            <input class="w-full px-4 py-3.5 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-dark focus:border-transparent transition-all text-gray-900 placeholder-gray-400" type="email" id="email" placeholder="Enter your email">
                         </div>
                         
-                        <div class="mb-5">
-                            <label class="block text-gray-700 mb-2 font-semibold" for="subject">Subject</label>
-                            <input class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" type="text" id="subject" placeholder="Subject of your message">
+                        <div>
+                            <label class="block text-gray-900 mb-2 font-semibold text-sm" for="subject">Subject</label>
+                            <input class="w-full px-4 py-3.5 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-dark focus:border-transparent transition-all text-gray-900 placeholder-gray-400" type="text" id="subject" placeholder="What is this regarding?">
                         </div>
                         
-                        <div class="mb-6">
-                            <label class="block text-gray-700 mb-2 font-semibold" for="message">Message</label>
-                            <textarea class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none" id="message" rows="5" placeholder="Your message"></textarea>
+                        <div>
+                            <label class="block text-gray-900 mb-2 font-semibold text-sm" for="message">Message</label>
+                            <textarea class="w-full px-4 py-3.5 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-dark focus:border-transparent transition-all resize-none text-gray-900 placeholder-gray-400" id="message" rows="5" placeholder="Tell us how we can help..."></textarea>
                         </div>
                         
-                        <button type="submit" class="bg-gradient-to-r from-primary to-teal-600 hover:from-teal-600 hover:to-primary text-white font-bold py-4 px-6 rounded-xl w-full transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
-                            Send Message <i class="fas fa-arrow-right ml-2"></i>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button type="button" id="send-email-btn" class="flex-1 bg-dark hover:bg-gray-800 active:bg-gray-900 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-100 flex items-center justify-center">
+                                <i class="fas fa-envelope mr-2"></i>
+                                Send via Email
+                            </button>
+                            <button type="button" id="send-whatsapp-btn" class="flex-1 bg-[#25D366] hover:bg-[#20BA5A] active:bg-[#1DA851] text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-100 flex items-center justify-center">
+                                <i class="fab fa-whatsapp mr-2 text-xl"></i>
+                                Send via WhatsApp
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donation Section -->
+    <section id="donate" class="py-16 md:py-24 bg-gradient-to-b from-white via-gray-50 to-white">
+        <div class="container mx-auto px-4">
+            <!-- Header -->
+            <div class="text-center mb-16 animate-on-scroll">
+                <span class="purpose-badge mb-4 inline-block">
+                    <i class="fas fa-heart mr-2"></i>
+                    Support NOVAR
+                </span>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    Donate to <span class="gradient-text">NOVAR App</span>
+                </h2>
+                <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
+                    Your support helps us continue providing quality education and improving the NOVAR platform for learners worldwide.
+                </p>
+            </div>
+            
+            <div class="max-w-2xl mx-auto">
+                <div class="contact-card rounded-3xl p-6 md:p-8 animate-on-scroll">
+                    <div class="text-center mb-8">
+                        <div class="purpose-icon-wrapper w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-hand-holding-heart text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl md:text-3xl font-bold mb-2 text-dark">Make a Donation</h3>
+                        <p class="text-gray-600">Every contribution makes a difference in empowering learners</p>
+                    </div>
+
+                    <form class="space-y-6" id="donation-form">
+                        <!-- Preset Amounts -->
+                        <div>
+                            <label class="block text-gray-900 mb-3 font-semibold text-sm">Select Amount (ZAR)</label>
+                            <div class="preset-amounts grid grid-cols-2 md:grid-cols-4 gap-3">
+                                <button type="button" data-amount="50" class="preset-amount-btn py-3 px-4 bg-white border-2 border-gray-200 rounded-xl hover:border-dark hover:bg-gray-50 transition-all font-semibold text-gray-900">
+                                    R 50
+                                </button>
+                                <button type="button" data-amount="100" class="preset-amount-btn py-3 px-4 bg-white border-2 border-gray-200 rounded-xl hover:border-dark hover:bg-gray-50 transition-all font-semibold text-gray-900">
+                                    R 100
+                                </button>
+                                <button type="button" data-amount="250" class="preset-amount-btn py-3 px-4 bg-white border-2 border-gray-200 rounded-xl hover:border-dark hover:bg-gray-50 transition-all font-semibold text-gray-900">
+                                    R 250
+                                </button>
+                                <button type="button" data-amount="500" class="preset-amount-btn py-3 px-4 bg-white border-2 border-gray-200 rounded-xl hover:border-dark hover:bg-gray-50 transition-all font-semibold text-gray-900">
+                                    R 500
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Custom Amount -->
+                        <div>
+                            <label class="block text-gray-900 mb-2 font-semibold text-sm" for="custom-amount">Or Enter Custom Amount (ZAR)</label>
+                            <input 
+                                class="w-full px-4 py-3.5 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-dark focus:border-transparent transition-all text-gray-900 placeholder-gray-400" 
+                                type="number" 
+                                id="custom-amount" 
+                                placeholder="Enter amount"
+                                min="1"
+                                step="1"
+                            >
+                            <input type="hidden" id="donation-amount" value="">
+                        </div>
+
+                        <!-- Donor Information -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-gray-900 mb-2 font-semibold text-sm" for="donation-name">Full Name *</label>
+                                <input 
+                                    class="w-full px-4 py-3.5 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-dark focus:border-transparent transition-all text-gray-900 placeholder-gray-400" 
+                                    type="text" 
+                                    id="donation-name" 
+                                    placeholder="Enter your name"
+                                    required
+                                >
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-900 mb-2 font-semibold text-sm" for="donation-email">Email Address *</label>
+                                <input 
+                                    class="w-full px-4 py-3.5 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-dark focus:border-transparent transition-all text-gray-900 placeholder-gray-400" 
+                                    type="email" 
+                                    id="donation-email" 
+                                    placeholder="Enter your email"
+                                    required
+                                >
+                            </div>
+                        </div>
+
+                        <!-- Donate Button -->
+                        <button 
+                            type="button" 
+                            id="donate-button" 
+                            class="w-full bg-dark hover:bg-gray-800 active:bg-gray-900 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-100 flex items-center justify-center"
+                        >
+                            <i class="fas fa-heart mr-2"></i>
+                            Donate Now
                         </button>
+
+                        <p class="text-center text-sm text-gray-500">
+                            <i class="fas fa-lock mr-1"></i>
+                            Secure payment powered by Paystack
+                        </p>
                     </form>
                 </div>
             </div>
@@ -415,16 +564,14 @@
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="flex items-center mb-4 md:mb-0">
-                    <i class="fas fa-graduation-cap text-secondary text-2xl mr-2"></i>
-                    <span class="text-xl font-bold">NOVAR Web</span>
+                    <img src="assets/novar.png" alt="NOVAR Logo" class="h-8 w-auto object-contain">
                 </div>
                 
                 <div class="text-center md:text-right">
-                    <p class="mb-2">© 2023 NOVAR Web. All rights reserved.</p>
+                    <p class="mb-2">© 2025 NOVAR Web. All rights reserved.</p>
                     <div class="flex justify-center md:justify-end space-x-4">
                         <a href="#" class="text-gray-400 hover:text-white transition">Privacy Policy</a>
                         <a href="#" class="text-gray-400 hover:text-white transition">Terms of Service</a>
-                        <a href="#" class="text-gray-400 hover:text-white transition">Cookie Policy</a>
                     </div>
                 </div>
             </div>
@@ -432,73 +579,30 @@
     </footer>
 
     <!-- Back to Top Button -->
-    <button id="back-to-top" class="fixed bottom-6 right-6 bg-gradient-to-r from-primary to-teal-600 text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center hover:from-teal-600 hover:to-primary transition-all duration-300 hidden transform hover:scale-110 hover:rotate-12">
+    <button id="back-to-top" class="fixed bottom-6 right-6 bg-dark hover:bg-gray-800 text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hidden transform hover:scale-110 hover:rotate-12">
         <i class="fas fa-arrow-up text-lg"></i>
     </button>
 
-    <script>
-        // Mobile menu toggle
-        document.getElementById('mobile-menu-button').addEventListener('click', function() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        });
+    <!-- Coming Soon Modal -->
+    <div id="coming-soon-modal" class="coming-soon-modal">
+        <div class="coming-soon-content">
+            <div class="text-center">
+                <div class="w-16 h-16 bg-dark rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fab fa-apple text-white text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-2">Coming Soon</h3>
+                <p class="text-gray-600 mb-6">The NOVAR app will be available on the App Store soon. Stay tuned for updates!</p>
+                <button id="close-coming-soon" class="bg-dark hover:bg-gray-800 text-white font-semibold py-3 px-8 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+                    Got it
+                </button>
+            </div>
+        </div>
+    </div>
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Close mobile menu after clicking a link
-                    document.getElementById('mobile-menu').classList.add('hidden');
-                }
-            });
-        });
-
-        // Back to top button
-        const backToTopButton = document.getElementById('back-to-top');
-        
-        window.addEventListener('scroll', function() {
-            if (window.pageYOffset > 300) {
-                backToTopButton.classList.remove('hidden');
-            } else {
-                backToTopButton.classList.add('hidden');
-            }
-        });
-        
-        backToTopButton.addEventListener('click', function() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        // Animate on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.animate-on-scroll').forEach(el => {
-            observer.observe(el);
-        });
-    </script>
+    <!-- JavaScript Files -->
+    <!-- Load configuration first -->
+    <script src="config/app.config.js"></script>
+    <!-- Load main application -->
+    <script type="module" src="js/main.js"></script>
 </body>
 </html>
