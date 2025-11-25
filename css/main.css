@@ -523,3 +523,19 @@
   box-shadow: 0 6px 8px -1px rgba(0, 0, 0, 0.2);
 }
 
+/* ============================================
+   NAVIGATION ACTIVE STATE
+   ============================================ */
+.nav-link.active .nav-underline {
+  width: 100% !important;
+}
+
+.nav-link.active {
+  font-weight: 600;
+}
+
+.mobile-menu-item.nav-link.active {
+  background-color: rgba(0, 0, 0, 0.08);
+  font-weight: 600;
+}
+

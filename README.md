@@ -180,3 +180,4 @@ When adding new features:
 4. Test across different browsers
 5. Ensure mobile responsiveness
 
+
