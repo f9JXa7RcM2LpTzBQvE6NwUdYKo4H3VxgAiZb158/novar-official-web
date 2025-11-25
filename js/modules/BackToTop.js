@@ -9,7 +9,8 @@ class BackToTop {
   constructor() {
     const config = window.AppConfig || {};
     const selectors = config.selectors || {};
-    this.button = getElementById(selectors.backToTop || 'back-to-top');
+    const btnSelector = selectors.backToTop || '#back-to-top';
+    this.button = document.querySelector(btnSelector);
     this.init();
   }
 

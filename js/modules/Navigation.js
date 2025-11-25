@@ -9,7 +9,8 @@ class Navigation {
   constructor() {
     const config = window.AppConfig || {};
     const selectors = config.selectors || {};
-    this.nav = getElementById(selectors.nav || 'main-nav');
+    const navSelector = selectors.nav || '#main-nav';
+    this.nav = document.querySelector(navSelector);
     this.init();
   }
 
