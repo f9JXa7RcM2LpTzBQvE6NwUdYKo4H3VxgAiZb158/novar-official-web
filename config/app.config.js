@@ -21,6 +21,10 @@ const AppConfig = {
     android: {
       enabled: true,
       url: 'https://play.google.com/store/apps/details?id=com.k2024009747.novar&hl=en_ZA'
+    },
+    appGallery: {
+      enabled: true,
+      url: 'https://appgallery.huawei.com/app/C116705113'
     }
   },
 
