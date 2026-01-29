@@ -10,6 +10,7 @@ import BackToTop from './modules/BackToTop.js';
 import ComingSoonModal from './modules/ComingSoonModal.js';
 import ContactForm from './modules/ContactForm.js';
 import Donation from './modules/Donation.js';
+import Router from './modules/Router.js';
 import { initSmoothScroll } from './utils/smoothScroll.js';
 
 /**
@@ -37,6 +38,9 @@ class App {
    */
   start() {
     try {
+      // Initialize routes
+      this.initRoutes();
+
       // Initialize all modules
       this.modules = [
         new MobileMenu(),
@@ -55,6 +59,22 @@ class App {
     } catch (error) {
       console.error('Error initializing application:', error);
     }
+  }
+
+  /**
+   * Initialize routing logic
+   */
+  initRoutes() {
+    // Define routes that require specific actions
+    // Most sections use smooth scroll, but we can add specific logic here
+    const sections = ['download', 'donate', 'purpose', 'features', 'contact'];
+    
+    sections.forEach(route => {
+      Router.addRoute(route, (r) => {
+        console.log(`Navigated to section: ${r}`);
+        // Navigation and SmoothScroll will handle the visual movement
+      });
+    });
   }
 }
 
