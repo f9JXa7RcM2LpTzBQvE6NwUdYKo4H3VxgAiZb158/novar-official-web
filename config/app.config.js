@@ -15,8 +15,8 @@ const AppConfig = {
   // App Store Links
   appStore: {
     ios: {
-      enabled: false, // Set to true when iOS app is available
-      url: 'https://apps.apple.com/app/novar'
+      enabled: true,
+      url: 'https://apps.apple.com/app/id6757470243'
     },
     android: {
       enabled: true,
