@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.k2024009747.novar",
+      "sha256_cert_fingerprints": [
+        "81:09:44:E7:B3:99:83:E8:41:68:BB:1E:CA:4F:CF:C0:18:11:D9:54:0B:A0:BE:A7:13:A4:89:11:A8:FD:E7:B1"
+      ]
+    }
+  }
+]
