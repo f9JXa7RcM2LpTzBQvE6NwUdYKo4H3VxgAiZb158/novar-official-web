@@ -3,15 +3,17 @@
  * Initializes all modules and sets up the application
  */
 
-import MobileMenu from './modules/MobileMenu.js';
-import Navigation from './modules/Navigation.js';
-import ScrollAnimations from './modules/ScrollAnimations.js';
-import BackToTop from './modules/BackToTop.js';
-import ComingSoonModal from './modules/ComingSoonModal.js';
-import ContactForm from './modules/ContactForm.js';
-import Donation from './modules/Donation.js';
-import Router from './modules/Router.js';
-import { initSmoothScroll } from './utils/smoothScroll.js';
+import MobileMenu from './modules/MobileMenu.js?v=nav22';
+import Navigation from './modules/Navigation.js?v=nav22';
+import ScrollAnimations from './modules/ScrollAnimations.js?v=nav22';
+import BackToTop from './modules/BackToTop.js?v=nav22';
+import ComingSoonModal from './modules/ComingSoonModal.js?v=nav22';
+import ContactForm from './modules/ContactForm.js?v=nav22';
+import Donation from './modules/Donation.js?v=nav22';
+import HeroTypewriter from './modules/HeroTypewriter.js?v=nav22';
+import HeroPhoneTour from './modules/HeroPhoneTour.js?v=nav22';
+import Router from './modules/Router.js?v=nav22';
+import { initSmoothScroll } from './utils/smoothScroll.js?v=nav22';
 
 /**
  * Application class
@@ -45,6 +47,8 @@ class App {
       this.modules = [
         new MobileMenu(),
         new Navigation(),
+        new HeroTypewriter(),
+        new HeroPhoneTour(),
         new ScrollAnimations(),
         new BackToTop(),
         new ComingSoonModal(),
@@ -54,6 +58,10 @@ class App {
 
       // Initialize utilities
       initSmoothScroll();
+
+      // Signals the <head> guard that the modules are alive, so the
+      // scroll-reveal styles may stay armed.
+      window.__novarAppReady = true;
 
       console.log('NOVAR Web application initialized successfully');
     } catch (error) {
@@ -67,7 +75,7 @@ class App {
   initRoutes() {
     // Define routes that require specific actions
     // Most sections use smooth scroll, but we can add specific logic here
-    const sections = ['download', 'donate', 'purpose', 'features', 'contact'];
+    const sections = ['download', 'purpose', 'features', 'donate', 'contact'];
     
     sections.forEach(route => {
       Router.addRoute(route, (r) => {

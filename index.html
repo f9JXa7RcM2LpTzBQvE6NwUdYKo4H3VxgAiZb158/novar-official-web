@@ -3,12 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="NOVAR Web - Educational Platform. Download the NOVAR app and access personalized learning paths, interactive content, and collaborative tools.">
-    <title>NOVAR Free Social Learning App</title>
+    <meta name="description" content="NOVAR is a social learning platform for learners across Africa — social learning from top creators, plus curriculum-aligned lessons developed by NOVAR and trusted organisations.">
+    <title>NOVAR Social Learning App</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png?v=7">
+    <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png?v=7">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png?v=7">
+    <link rel="apple-touch-icon" href="assets/favicon-192.png?v=7">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
     
     <!-- External Stylesheets -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/main.css?v=nav23">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -32,47 +40,74 @@
             }
         }
     </script>
+
+    <!-- Progressive enhancement guard.
+         Scroll-reveal blocks are hidden (opacity:0) only while `js-anim` is set, and
+         JS is what reveals them. This classic inline script runs even when the ES
+         module in js/main.js fails (e.g. opened over file://, blocked, or a JS error),
+         so if the app never signals ready we drop the class and show all content. -->
+    <script>
+        document.documentElement.classList.add('js-anim');
+        (function () {
+            var checked = false;
+            function reveal() {
+                if (checked) return;
+                checked = true;
+                if (!window.__novarAppReady) {
+                    document.documentElement.classList.remove('js-anim');
+                }
+            }
+            // Modules run before DOMContentLoaded, so that is the first honest
+            // point to check. The timer is a backstop for when DOMContentLoaded
+            // is itself delayed by a slow third-party script; neither waits on
+            // images or CDNs the way the load event does.
+            document.addEventListener('DOMContentLoaded', function () {
+                setTimeout(reveal, 0);
+            });
+            setTimeout(reveal, 3000);
+        })();
+    </script>
 </head>
 <body class="bg-light text-dark font-sans overflow-x-hidden">
-    <!-- Navigation -->
-    <nav id="main-nav" class="nav-glass fixed w-full z-50">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center py-4">
-                <div class="flex items-center group cursor-pointer">
-                    <img src="assets/novar.png" alt="NOVAR Logo" class="h-8 w-auto object-contain">
+    <!-- Navigation — floating pill bar -->
+    <nav id="main-nav" class="nav-float fixed top-0 left-0 right-0 z-50 flex justify-center px-3 sm:px-4 pt-3 sm:pt-5">
+        <div class="nav-pill" id="nav-pill">
+            <div class="nav-pill-top">
+                <a href="#download" class="nav-pill-brand" aria-label="NOVAR home">
+                    <img src="assets/novar.png" alt="NOVAR" class="h-5 sm:h-6 w-auto object-contain">
+                </a>
+
+                <!-- Desktop links -->
+                <div class="nav-pill-links nav-pill-links--desktop">
+                    <a href="#download" class="nav-link nav-pill-link" data-section="download">Download</a>
+                    <a href="#purpose" class="nav-link nav-pill-link" data-section="purpose">About</a>
+                    <a href="#features" class="nav-link nav-pill-link" data-section="features">Leaders</a>
+                    <a href="#donate" class="nav-link nav-pill-link" data-section="donate">Donate</a>
                 </div>
-                
-                <!-- Mobile menu button -->
-                <div class="md:hidden">
-                    <button id="mobile-menu-button" class="hamburger focus:outline-none" aria-label="Toggle menu">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
+
+                <!-- Desktop actions -->
+                <div class="nav-pill-actions nav-pill-actions--desktop">
+                    <a href="#contact" class="nav-pill-btn nav-pill-btn-ghost nav-link" data-section="contact">Contact</a>
+                    <a href="#download" class="nav-pill-btn nav-pill-btn-primary">Get the app</a>
                 </div>
-                
-                <!-- Desktop menu -->
-                <div class="hidden md:flex space-x-8">
-                    <a href="#download" class="nav-link text-dark hover:text-gray-600 transition-all relative group" data-section="download">
-                        Download
-                        <span class="nav-underline absolute bottom-0 left-0 w-0 h-0.5 bg-dark transition-all group-hover:w-full"></span>
-                    </a>
-                    <a href="#donate" class="nav-link text-dark hover:text-gray-600 transition-all relative group" data-section="donate">
-                        Donate
-                        <span class="nav-underline absolute bottom-0 left-0 w-0 h-0.5 bg-dark transition-all group-hover:w-full"></span>
-                    </a>
-                    <a href="#purpose" class="nav-link text-dark hover:text-gray-600 transition-all relative group" data-section="purpose">
-                        About
-                        <span class="nav-underline absolute bottom-0 left-0 w-0 h-0.5 bg-dark transition-all group-hover:w-full"></span>
-                    </a>
-                    <a href="#features" class="nav-link text-dark hover:text-gray-600 transition-all relative group" data-section="features">
-                        Leaders
-                        <span class="nav-underline absolute bottom-0 left-0 w-0 h-0.5 bg-dark transition-all group-hover:w-full"></span>
-                    </a>
-                    <a href="#contact" class="nav-link text-dark hover:text-gray-600 transition-all relative group" data-section="contact">
-                        Contact
-                        <span class="nav-underline absolute bottom-0 left-0 w-0 h-0.5 bg-dark transition-all group-hover:w-full"></span>
-                    </a>
+
+                <!-- Mobile expand button -->
+                <button type="button" id="mobile-menu-button" class="nav-pill-menu focus:outline-none" aria-label="Open menu" aria-expanded="false" aria-controls="nav-pill-panel">
+                    <span class="nav-more-icon" aria-hidden="true">
+                        <i></i><i></i><i></i>
+                    </span>
+                </button>
+            </div>
+
+            <!-- Mobile downward expand panel -->
+            <div class="nav-pill-panel" id="nav-pill-panel">
+                <div class="nav-pill-panel-inner">
+                    <a href="#download" class="nav-link nav-pill-panel-link" data-section="download">Download</a>
+                    <a href="#purpose" class="nav-link nav-pill-panel-link" data-section="purpose">About</a>
+                    <a href="#features" class="nav-link nav-pill-panel-link" data-section="features">Leaders</a>
+                    <a href="#donate" class="nav-link nav-pill-panel-link" data-section="donate">Donate</a>
+                    <a href="#contact" class="nav-link nav-pill-panel-link" data-section="contact">Contact</a>
+                    <a href="#download" class="nav-pill-btn nav-pill-btn-primary nav-pill-panel-cta">Get the app</a>
                 </div>
             </div>
         </div>
@@ -81,238 +116,80 @@
     <!-- Mobile Menu Overlay -->
     <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
 
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="mobile-menu md:hidden">
-        <div class="p-6">
-            <div class="flex justify-between items-center mb-8">
-                <div class="flex items-center">
-                    <img src="assets/novar.png" alt="NOVAR Logo" class="h-8 w-auto object-contain">
-                </div>
-            </div>
-            
-            <nav class="space-y-2">
-                <a href="#download" class="mobile-menu-item nav-link block py-4 px-4 text-dark text-lg font-medium rounded-xl hover:bg-gray-100 transition-all duration-200 active:bg-gray-200" data-section="download">
-                    <div class="flex items-center">
-                        <i class="fas fa-download mr-3 text-gray-600"></i>
-                        <span>Download</span>
-                    </div>
-                </a>
-                <a href="#donate" class="mobile-menu-item nav-link block py-4 px-4 text-dark text-lg font-medium rounded-xl hover:bg-gray-100 transition-all duration-200 active:bg-gray-200" data-section="donate">
-                    <div class="flex items-center">
-                        <i class="fas fa-heart mr-3 text-gray-600"></i>
-                        <span>Donate</span>
-                    </div>
-                </a>
-                <a href="#purpose" class="mobile-menu-item nav-link block py-4 px-4 text-dark text-lg font-medium rounded-xl hover:bg-gray-100 transition-all duration-200 active:bg-gray-200" data-section="purpose">
-                    <div class="flex items-center">
-                        <i class="fas fa-bullseye mr-3 text-gray-600"></i>
-                        <span>About</span>
-                    </div>
-                </a>
-                <a href="#features" class="mobile-menu-item nav-link block py-4 px-4 text-dark text-lg font-medium rounded-xl hover:bg-gray-100 transition-all duration-200 active:bg-gray-200" data-section="features">
-                    <div class="flex items-center">
-                        <i class="fas fa-star mr-3 text-gray-600"></i>
-                        <span>Leaders</span>
-                    </div>
-                </a>
-                <a href="#contact" class="mobile-menu-item nav-link block py-4 px-4 text-dark text-lg font-medium rounded-xl hover:bg-gray-100 transition-all duration-200 active:bg-gray-200" data-section="contact">
-                    <div class="flex items-center">
-                        <i class="fas fa-envelope mr-3 text-gray-600"></i>
-                        <span>Contact</span>
-                    </div>
-                </a>
-            </nav>
-        </div>
-    </div>
-
     <!-- Hero Section -->
-    <section id="download" class="pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white relative overflow-hidden">
-        <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"0.05\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
+    <section id="download" class="hero-section relative overflow-hidden text-white">
+        <div class="hero-ambient" aria-hidden="true"></div>
+        <div class="hero-grid-overlay" aria-hidden="true"></div>
+
         <div class="container mx-auto px-4 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <!-- Text Content -->
-                <div class="text-center lg:text-left">
-                    <h1 class="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
-                        It's more <span class="text-white">than just learning</span>
+            <div class="hero-layout">
+                <div class="hero-copy text-center lg:text-left">
+                    <h1 class="hero-title hero-reveal" style="--d: 0.08s">
+                        <span id="hero-typewriter" class="hero-typewriter" aria-label="It's more than just learning"></span><span id="hero-cursor" class="hero-cursor" aria-hidden="true"></span>
                     </h1>
-                    <p class="text-xl md:text-2xl mb-8 opacity-90 animate-slide-up">Redifining access.</p>
-                    
-                    <!-- Download Buttons -->
-                    <div class="mb-8 animate-slide-up">
-                        <p class="text-base md:text-lg mb-4 text-center lg:text-left font-bold text-white tracking-tight uppercase letter-spacing-wider">Download NOVAR app now</p>
-                        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start download-buttons-container">
-                            <button type="button" id="ios-download-btn" class="download-btn text-dark font-semibold py-4 px-6 rounded-2xl flex items-center justify-center group min-w-[180px] sm:min-w-[200px]">
-                                <i class="fab fa-apple download-btn-icon text-3xl mr-4"></i>
+                    <p class="hero-subtitle hero-reveal" style="--d: 0.16s">Redefining access.</p>
+
+                    <div class="hero-stores hero-reveal" style="--d: 0.24s">
+                        <p class="hero-stores-label">Download NOVAR now</p>
+                        <div class="download-buttons-container">
+                            <button type="button" id="ios-download-btn" class="download-btn text-dark font-semibold flex items-center justify-center group">
+                                <i class="fab fa-apple download-btn-icon text-xl sm:text-2xl mr-2.5"></i>
                                 <div class="text-left download-btn-text flex-1">
-                                    <div class="text-xs opacity-70 font-normal leading-tight mb-0.5">Download on the</div>
-                                    <div class="font-bold text-base leading-tight">App Store</div>
+                                    <div class="text-[9px] sm:text-[10px] opacity-70 font-normal leading-tight mb-0.5">Download on the</div>
+                                    <div class="font-bold text-xs sm:text-sm leading-tight">App Store</div>
                                 </div>
                             </button>
-                            <a href="https://play.google.com/store/apps/details?id=com.k2024009747.novar&hl=en_ZA" target="_blank" rel="noopener noreferrer" class="download-btn text-dark font-semibold py-4 px-6 rounded-2xl flex items-center justify-center group min-w-[180px] sm:min-w-[200px]">
-                                <i class="fab fa-google-play download-btn-icon text-2xl mr-4"></i>
+                            <a href="https://play.google.com/store/apps/details?id=com.k2024009747.novar&hl=en_ZA" target="_blank" rel="noopener noreferrer" class="download-btn text-dark font-semibold flex items-center justify-center group">
+                                <i class="fab fa-google-play download-btn-icon text-lg sm:text-xl mr-2.5"></i>
                                 <div class="text-left download-btn-text flex-1">
-                                    <div class="text-xs opacity-70 font-normal leading-tight mb-0.5">Get it on</div>
-                                    <div class="font-bold text-base leading-tight">Google Play</div>
+                                    <div class="text-[9px] sm:text-[10px] opacity-70 font-normal leading-tight mb-0.5">Get it on</div>
+                                    <div class="font-bold text-xs sm:text-sm leading-tight">Google Play</div>
                                 </div>
                             </a>
-                            <a href="https://appgallery.huawei.com/app/C116705113" target="_blank" rel="noopener noreferrer" class="download-btn text-dark font-semibold py-4 px-6 rounded-2xl flex items-center justify-center group min-w-[180px] sm:min-w-[200px]">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/f/f6/Huawei_AppGallery.svg" alt="AppGallery" class="download-btn-icon mr-4 w-8 h-8 object-contain flex-shrink-0" width="32" height="32">
+                            <a href="https://appgallery.huawei.com/app/C116705113" target="_blank" rel="noopener noreferrer" class="download-btn text-dark font-semibold flex items-center justify-center group">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/f/f6/Huawei_AppGallery.svg" alt="" class="download-btn-icon mr-2.5 w-5 h-5 sm:w-6 sm:h-6 object-contain flex-shrink-0" width="24" height="24">
                                 <div class="text-left download-btn-text flex-1">
-                                    <div class="text-xs opacity-70 font-normal leading-tight mb-0.5">Explore on</div>
-                                    <div class="font-bold text-base leading-tight">AppGallery</div>
+                                    <div class="text-[9px] sm:text-[10px] opacity-70 font-normal leading-tight mb-0.5">Explore on</div>
+                                    <div class="font-bold text-xs sm:text-sm leading-tight">AppGallery</div>
                                 </div>
                             </a>
                         </div>
                     </div>
-                    
-                    <!-- Action Buttons -->
-                    <div class="flex flex-col sm:flex-row gap-4 animate-slide-up justify-center lg:justify-start">
-                        <a href="#purpose" class="bg-white/10 backdrop-blur-sm border-2 border-white/30 hover:bg-white hover:text-dark active:bg-white/20 text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 shadow-lg hover:shadow-2xl active:scale-95 transform text-center">
-                            Learn More
-                        </a>
+
+                    <div class="hero-cta hero-reveal" style="--d: 0.32s">
+                        <a href="#purpose" class="hero-cta-btn">Learn more</a>
                     </div>
                 </div>
-                
-                <!-- App Screenshot -->
-                <div class="flex justify-center lg:justify-end phone-mockup animate-slide-up">
+
+                <div class="hero-visual phone-mockup hero-reveal" style="--d: 0.2s">
                     <div class="phone-mockup-inner">
                         <div class="relative">
-                            <!-- Phone Frame -->
-                            <div class="bg-dark w-72 h-[600px] rounded-[3rem] p-3 shadow-2xl">
-                                <!-- Notch -->
-                                <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-6 bg-dark rounded-b-2xl z-10"></div>
-                                
-                                <!-- Screen -->
-                                <div class="bg-white w-full h-full rounded-[2.5rem] overflow-hidden relative">
-                                    <!-- Status Bar -->
-                                    <div class="bg-gradient-to-br from-gray-800 to-black px-6 py-2 flex justify-between items-center text-white text-xs">
-                                        <span>9:41</span>
-                                        <div class="flex items-center gap-1">
-                                            <i class="fas fa-signal text-xs"></i>
-                                            <i class="fas fa-wifi text-xs"></i>
-                                            <i class="fas fa-battery-three-quarters text-xs"></i>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- App Content - Logo Centered -->
-                                    <div class="h-full bg-white flex items-center justify-center">
-                                        <div class="text-center px-6">
-                                            <img src="assets/NOVAR logo.jpeg" alt="NOVAR App Logo" class="w-64 h-72 md:w-72 md:h-80 mx-auto object-contain scale-110">
+                            <div class="hero-phone-frame">
+                                <div class="hero-phone-notch" aria-hidden="true"></div>
+                                <div class="hero-phone-screen">
+                                    <div class="hero-phone-content" id="hero-phone-tour">
+                                        <div class="hero-tour" aria-live="polite">
+                                            <div class="hero-tour-slide" data-slide="0">
+                                                <div class="hero-tour-splash">
+                                                    <img src="assets/NOVAR%20logo.jpeg" alt="" class="hero-tour-splash-logo">
+                                                </div>
+                                            </div>
+                                            <div class="hero-tour-slide is-active" data-slide="1">
+                                                <img src="assets/feed.png" alt="NOVAR feed" class="hero-tour-shot" width="1206" height="2622" decoding="async">
+                                            </div>
+                                            <div class="hero-tour-slide" data-slide="2">
+                                                <img src="assets/lessons.png" alt="NOVAR learning video" class="hero-tour-shot" width="1206" height="2622" decoding="async">
+                                            </div>
+                                            <div class="hero-tour-slide" data-slide="3">
+                                                <img src="assets/shorts.png" alt="NOVAR shorts" class="hero-tour-shot" width="1206" height="2622" decoding="async">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            
-                            <!-- Decorative Glow -->
-                            <div class="absolute -inset-4 bg-gradient-to-r from-white/10 to-transparent rounded-[3rem] blur-2xl -z-10"></div>
+                            <div class="hero-phone-glow" aria-hidden="true"></div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Donation Section -->
-    <section id="donate" class="py-16 md:py-24 bg-gradient-to-b from-white via-gray-50 to-white">
-        <div class="container mx-auto px-4">
-            <!-- Header -->
-            <div class="text-center mb-16 animate-on-scroll">
-                <span class="purpose-badge mb-4 inline-block">
-                    <i class="fas fa-heart mr-2"></i>
-                    Support NOVAR
-                </span>
-                <h2 class="text-4xl md:text-5xl font-bold mb-4">
-                    Donate to <span class="gradient-text">NOVAR App</span>
-                </h2>
-                <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
-                    Your support helps us continue providing quality education and improving the NOVAR platform for learners worldwide.
-                </p>
-            </div>
-            
-            <div class="max-w-2xl mx-auto">
-                <div class="contact-card rounded-3xl p-6 md:p-8 animate-on-scroll">
-                    <div class="text-center mb-8">
-                        <div class="purpose-icon-wrapper w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-hand-holding-heart text-white text-2xl"></i>
-                        </div>
-                        <h3 class="text-2xl md:text-3xl font-bold mb-2 text-dark">Make a Donation</h3>
-                        <p class="text-gray-600">Every contribution makes a difference in empowering learners</p>
-                    </div>
-
-                    <form class="space-y-6" id="donation-form">
-                        <!-- Preset Amounts -->
-                        <div>
-                            <label class="block text-gray-900 mb-3 font-semibold text-sm">Select Amount (ZAR)</label>
-                            <div class="preset-amounts grid grid-cols-2 md:grid-cols-4 gap-3">
-                                <button type="button" data-amount="50" class="preset-amount-btn py-3 px-4 bg-white border-2 border-gray-200 rounded-xl hover:border-dark hover:bg-gray-50 transition-all font-semibold text-gray-900">
-                                    R 50
-                                </button>
-                                <button type="button" data-amount="100" class="preset-amount-btn py-3 px-4 bg-white border-2 border-gray-200 rounded-xl hover:border-dark hover:bg-gray-50 transition-all font-semibold text-gray-900">
-                                    R 100
-                                </button>
-                                <button type="button" data-amount="250" class="preset-amount-btn py-3 px-4 bg-white border-2 border-gray-200 rounded-xl hover:border-dark hover:bg-gray-50 transition-all font-semibold text-gray-900">
-                                    R 250
-                                </button>
-                                <button type="button" data-amount="500" class="preset-amount-btn py-3 px-4 bg-white border-2 border-gray-200 rounded-xl hover:border-dark hover:bg-gray-50 transition-all font-semibold text-gray-900">
-                                    R 500
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Custom Amount -->
-                        <div>
-                            <label class="block text-gray-900 mb-2 font-semibold text-sm" for="custom-amount">Or Enter Custom Amount (ZAR)</label>
-                            <input 
-                                class="w-full px-4 py-3.5 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-dark focus:border-transparent transition-all text-gray-900 placeholder-gray-400" 
-                                type="number" 
-                                id="custom-amount" 
-                                placeholder="Enter amount"
-                                min="1"
-                                step="1"
-                            >
-                            <input type="hidden" id="donation-amount" value="">
-                        </div>
-
-                        <!-- Donor Information -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                            <div>
-                                <label class="block text-gray-900 mb-2 font-semibold text-sm" for="donation-name">Full Name *</label>
-                                <input 
-                                    class="w-full px-4 py-3.5 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-dark focus:border-transparent transition-all text-gray-900 placeholder-gray-400" 
-                                    type="text" 
-                                    id="donation-name" 
-                                    placeholder="Enter your name"
-                                    required
-                                >
-                            </div>
-                            
-                            <div>
-                                <label class="block text-gray-900 mb-2 font-semibold text-sm" for="donation-email">Email Address *</label>
-                                <input 
-                                    class="w-full px-4 py-3.5 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-dark focus:border-transparent transition-all text-gray-900 placeholder-gray-400" 
-                                    type="email" 
-                                    id="donation-email" 
-                                    placeholder="Enter your email"
-                                    required
-                                >
-                            </div>
-                        </div>
-
-                        <!-- Donate Button -->
-                        <button 
-                            type="button" 
-                            id="donate-button" 
-                            class="w-full bg-dark hover:bg-gray-800 active:bg-gray-900 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-100 flex items-center justify-center"
-                        >
-                            <i class="fas fa-heart mr-2"></i>
-                            Donate Now
-                        </button>
-
-                        <p class="text-center text-sm text-gray-500">
-                            <i class="fas fa-lock mr-1"></i>
-                            Secure payment powered by Paystack
-                        </p>
-                    </form>
                 </div>
             </div>
         </div>
@@ -331,7 +208,7 @@
                     What is <span class="gradient-text">NOVAR app</span>
                 </h2>
                 <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
-                    NOVAR app is a free African educational platform for primary and high school learners, where top creators deliver high-quality content and innovative learning solutions to tackle educational inequality and the psychosocial challenges learners face.
+                    NOVAR app is a social learning platform for learners across Africa. It brings together two ways to learn: a social feed where top creators upload and share learning content, and curriculum-aligned lessons developed by NOVAR and trusted partner organisations. Together they tackle educational inequality and the psychosocial challenges learners face.
                 </p>
             </div>
             
@@ -347,7 +224,7 @@
                             <div class="flex-1">
                                 <h3 class="text-2xl md:text-3xl font-bold mb-3 text-dark">Our Mission</h3>
                                 <p class="text-base md:text-lg leading-relaxed text-gray-700">
-                                    To provide free, accessible, and high-quality education to learners across Africa, especially those in rural and under-resourced communities.
+                                    To provide accessible, high-quality education to learners across Africa, especially those in rural and under-resourced communities.
                                 </p>
                             </div>
                         </div>
@@ -370,8 +247,8 @@
                                     <i class="fas fa-check text-white text-sm"></i>
                                 </div>
                                 <div class="flex-1">
-                                    <h4 class="font-bold text-gray-900 mb-1">Free High-Quality Learning</h4>
-                                    <p class="text-sm md:text-base text-gray-600 leading-relaxed">NOVAR offers engaging, curriculum-aligned content created by top educators and creators. All learning is completely free and accessible to every African learner.</p>
+                                    <h4 class="font-bold text-gray-900 mb-1">Accessible High-Quality Learning</h4>
+                                    <p class="text-sm md:text-base text-gray-600 leading-relaxed">NOVAR offers engaging content shared by top creators, alongside curriculum-aligned lessons developed by NOVAR and trusted organisations. All learning is accessible to every African learner.</p>
                                 </div>
                             </div>
                             
@@ -465,93 +342,193 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white">
+    <!-- Donation Section -->
+    <section id="donate" class="py-12 md:py-16 bg-gradient-to-b from-white via-gray-50 to-white">
         <div class="container mx-auto px-4">
             <!-- Header -->
-            <div class="text-center mb-16 animate-on-scroll">
-                <span class="purpose-badge mb-4 inline-block">
-                    <i class="fas fa-envelope mr-2"></i>
-                    Get In Touch
+            <div class="text-center mb-8 md:mb-10 animate-on-scroll">
+                <span class="purpose-badge mb-3 inline-block">
+                    <i class="fas fa-heart mr-2"></i>
+                    Support NOVAR
                 </span>
-                <h2 class="text-4xl md:text-5xl font-bold mb-4">
-                    Contact <span class="gradient-text">Us</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-2">
+                    Donate to <span class="gradient-text">NOVAR App</span>
                 </h2>
-                <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
-                    Have questions about NOVAR Web? Our team is here to help you with any inquiries about our platform, features, or implementation.
+                <p class="text-base md:text-lg text-gray-600 max-w-xl mx-auto">
+                    Your support helps us keep quality education accessible for learners worldwide.
                 </p>
             </div>
             
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
+            <div class="max-w-xl mx-auto">
+                <div class="donation-card contact-card rounded-2xl p-5 md:p-6 animate-on-scroll">
+                    <form class="space-y-4" id="donation-form">
+                        <!-- Preset Amounts -->
+                        <div>
+                            <label class="block text-gray-900 mb-2 font-semibold text-sm">Select Amount (ZAR)</label>
+                            <div class="preset-amounts grid grid-cols-4 gap-2">
+                                <button type="button" data-amount="50" class="preset-amount-btn py-2.5 px-2 bg-white border-2 border-gray-200 rounded-xl hover:border-dark hover:bg-gray-50 transition-all font-semibold text-sm text-gray-900">
+                                    R 50
+                                </button>
+                                <button type="button" data-amount="100" class="preset-amount-btn py-2.5 px-2 bg-white border-2 border-gray-200 rounded-xl hover:border-dark hover:bg-gray-50 transition-all font-semibold text-sm text-gray-900">
+                                    R 100
+                                </button>
+                                <button type="button" data-amount="250" class="preset-amount-btn py-2.5 px-2 bg-white border-2 border-gray-200 rounded-xl hover:border-dark hover:bg-gray-50 transition-all font-semibold text-sm text-gray-900">
+                                    R 250
+                                </button>
+                                <button type="button" data-amount="500" class="preset-amount-btn py-2.5 px-2 bg-white border-2 border-gray-200 rounded-xl hover:border-dark hover:bg-gray-50 transition-all font-semibold text-sm text-gray-900">
+                                    R 500
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Custom Amount -->
+                        <div>
+                            <label class="block text-gray-900 mb-1.5 font-semibold text-sm" for="custom-amount">Custom amount (ZAR)</label>
+                            <input 
+                                class="w-full px-3.5 py-2.5 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-dark focus:border-transparent transition-all text-gray-900 placeholder-gray-400" 
+                                type="number" 
+                                id="custom-amount" 
+                                placeholder="Enter amount"
+                                min="1"
+                                step="1"
+                            >
+                            <input type="hidden" id="donation-amount" value="">
+                        </div>
+
+                        <!-- Donor Information -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-gray-900 mb-1.5 font-semibold text-sm" for="donation-name">Full Name *</label>
+                                <input 
+                                    class="w-full px-3.5 py-2.5 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-dark focus:border-transparent transition-all text-gray-900 placeholder-gray-400" 
+                                    type="text" 
+                                    id="donation-name" 
+                                    placeholder="Your name"
+                                    required
+                                >
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-900 mb-1.5 font-semibold text-sm" for="donation-email">Email *</label>
+                                <input 
+                                    class="w-full px-3.5 py-2.5 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-dark focus:border-transparent transition-all text-gray-900 placeholder-gray-400" 
+                                    type="email" 
+                                    id="donation-email" 
+                                    placeholder="Your email"
+                                    required
+                                >
+                            </div>
+                        </div>
+
+                        <!-- Donate Button -->
+                        <button 
+                            type="button" 
+                            id="donate-button" 
+                            class="w-full bg-dark hover:bg-gray-800 active:bg-gray-900 text-white font-bold py-3 px-5 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center"
+                        >
+                            <i class="fas fa-heart mr-2"></i>
+                            Donate Now
+                        </button>
+
+                        <p class="text-center text-xs text-gray-500 !mt-2.5">
+                            <i class="fas fa-lock mr-1"></i>
+                            Secure payment powered by Paystack
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-12 md:py-16 bg-gradient-to-b from-gray-50 to-white">
+        <div class="container mx-auto px-4">
+            <!-- Header -->
+            <div class="text-center mb-8 md:mb-10 animate-on-scroll">
+                <span class="purpose-badge mb-3 inline-block">
+                    <i class="fas fa-envelope mr-2"></i>
+                    Get In Touch
+                </span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-2">
+                    Contact <span class="gradient-text">Us</span>
+                </h2>
+                <p class="text-base md:text-lg text-gray-600 max-w-xl mx-auto">
+                    Questions about NOVAR? We’re here to help with the platform, features, or anything else.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-6">
                 <!-- Contact Information -->
-                <div class="contact-card rounded-3xl p-6 md:p-8 animate-on-scroll">
-                    <h3 class="text-2xl md:text-3xl font-bold mb-6 text-dark flex items-center">
-                        <div class="purpose-icon-wrapper w-12 h-12 rounded-xl flex items-center justify-center mr-4">
-                            <i class="fas fa-headset text-white"></i>
+                <div class="contact-card rounded-2xl p-5 md:p-6 animate-on-scroll">
+                    <h3 class="text-xl md:text-2xl font-bold mb-4 text-dark flex items-center">
+                        <div class="purpose-icon-wrapper w-9 h-9 rounded-lg flex items-center justify-center mr-3">
+                            <i class="fas fa-headset text-white text-sm"></i>
                         </div>
                         Contact Information
                     </h3>
                     
-                    <div class="space-y-6">
-                        <div class="contact-info-item flex items-start p-4 rounded-xl bg-white/50">
-                            <div class="contact-icon w-12 h-12 rounded-xl bg-gray-700 flex items-center justify-center mr-4 flex-shrink-0">
-                                <i class="fas fa-phone-alt text-white"></i>
+                    <div class="space-y-3">
+                        <div class="contact-info-item flex items-center p-3 rounded-xl bg-white/50">
+                            <div class="contact-icon w-10 h-10 rounded-lg bg-gray-700 flex items-center justify-center mr-3 flex-shrink-0">
+                                <i class="fas fa-phone-alt text-white text-sm"></i>
                             </div>
                             <div>
-                                <h4 class="font-bold text-gray-900 mb-1">Phone</h4>
-                                <p class="text-gray-600">+27 (63) 488-8362</p>
-                                <p class="text-gray-600">+27 (78) 127-1344</p>
+                                <h4 class="font-bold text-gray-900 text-sm mb-0.5">Phone</h4>
+                                <p class="text-gray-600 text-sm leading-snug">+27 (63) 488-8362</p>
+                                <p class="text-gray-600 text-sm leading-snug">+27 (78) 127-1344</p>
                             </div>
                         </div>
                         
-                        <div class="contact-info-item flex items-start p-4 rounded-xl bg-white/50">
-                            <div class="contact-icon w-12 h-12 rounded-xl bg-gray-600 flex items-center justify-center mr-4 flex-shrink-0">
-                                <i class="fas fa-envelope text-white"></i>
+                        <div class="contact-info-item flex items-center p-3 rounded-xl bg-white/50">
+                            <div class="contact-icon w-10 h-10 rounded-lg bg-gray-600 flex items-center justify-center mr-3 flex-shrink-0">
+                                <i class="fas fa-envelope text-white text-sm"></i>
                             </div>
                             <div>
-                                <h4 class="font-bold text-gray-900 mb-1">Email</h4>
-                                <p class="text-gray-600">support@novarapp.com</p>
+                                <h4 class="font-bold text-gray-900 text-sm mb-0.5">Email</h4>
+                                <p class="text-gray-600 text-sm">support@novarapp.com</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Contact Form -->
-                <div class="contact-card rounded-3xl p-6 md:p-8 animate-on-scroll">
-                    <h3 class="text-2xl md:text-3xl font-bold mb-6 text-dark flex items-center">
-                        <div class="purpose-icon-wrapper w-12 h-12 rounded-xl flex items-center justify-center mr-4">
-                            <i class="fas fa-paper-plane text-white"></i>
+                <div class="contact-card rounded-2xl p-5 md:p-6 animate-on-scroll">
+                    <h3 class="text-xl md:text-2xl font-bold mb-4 text-dark flex items-center">
+                        <div class="purpose-icon-wrapper w-9 h-9 rounded-lg flex items-center justify-center mr-3">
+                            <i class="fas fa-paper-plane text-white text-sm"></i>
                         </div>
                         Send Us a Message
                     </h3>
-                    <form class="space-y-5">
-                        <div>
-                            <label class="block text-gray-900 mb-2 font-semibold text-sm" for="name">Full Name</label>
-                            <input class="w-full px-4 py-3.5 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-dark focus:border-transparent transition-all text-gray-900 placeholder-gray-400" type="text" id="name" placeholder="Enter your name">
+                    <form class="space-y-3">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-gray-900 mb-1.5 font-semibold text-sm" for="name">Full Name</label>
+                                <input class="w-full px-3.5 py-2.5 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-dark focus:border-transparent transition-all text-gray-900 placeholder-gray-400" type="text" id="name" placeholder="Your name">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-900 mb-1.5 font-semibold text-sm" for="email">Email</label>
+                                <input class="w-full px-3.5 py-2.5 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-dark focus:border-transparent transition-all text-gray-900 placeholder-gray-400" type="email" id="email" placeholder="Your email">
+                            </div>
                         </div>
                         
                         <div>
-                            <label class="block text-gray-900 mb-2 font-semibold text-sm" for="email">Email Address</label>
-                            <input class="w-full px-4 py-3.5 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-dark focus:border-transparent transition-all text-gray-900 placeholder-gray-400" type="email" id="email" placeholder="Enter your email">
+                            <label class="block text-gray-900 mb-1.5 font-semibold text-sm" for="subject">Subject</label>
+                            <input class="w-full px-3.5 py-2.5 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-dark focus:border-transparent transition-all text-gray-900 placeholder-gray-400" type="text" id="subject" placeholder="What is this regarding?">
                         </div>
                         
                         <div>
-                            <label class="block text-gray-900 mb-2 font-semibold text-sm" for="subject">Subject</label>
-                            <input class="w-full px-4 py-3.5 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-dark focus:border-transparent transition-all text-gray-900 placeholder-gray-400" type="text" id="subject" placeholder="What is this regarding?">
+                            <label class="block text-gray-900 mb-1.5 font-semibold text-sm" for="message">Message</label>
+                            <textarea class="w-full px-3.5 py-2.5 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-dark focus:border-transparent transition-all resize-none text-gray-900 placeholder-gray-400" id="message" rows="3" placeholder="How can we help?"></textarea>
                         </div>
                         
-                        <div>
-                            <label class="block text-gray-900 mb-2 font-semibold text-sm" for="message">Message</label>
-                            <textarea class="w-full px-4 py-3.5 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-dark focus:border-transparent transition-all resize-none text-gray-900 placeholder-gray-400" id="message" rows="5" placeholder="Tell us how we can help..."></textarea>
-                        </div>
-                        
-                        <div class="flex flex-col sm:flex-row gap-4">
-                            <button type="button" id="send-email-btn" class="flex-1 bg-dark hover:bg-gray-800 active:bg-gray-900 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-100 flex items-center justify-center">
+                        <div class="flex flex-col sm:flex-row gap-2.5 pt-0.5">
+                            <button type="button" id="send-email-btn" class="flex-1 bg-dark hover:bg-gray-800 active:bg-gray-900 text-white font-bold py-2.5 px-4 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center text-sm">
                                 <i class="fas fa-envelope mr-2"></i>
                                 Send via Email
                             </button>
-                            <button type="button" id="send-whatsapp-btn" class="flex-1 bg-[#25D366] hover:bg-[#20BA5A] active:bg-[#1DA851] text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-100 flex items-center justify-center">
-                                <i class="fab fa-whatsapp mr-2 text-xl"></i>
+                            <button type="button" id="send-whatsapp-btn" class="flex-1 bg-[#25D366] hover:bg-[#20BA5A] active:bg-[#1DA851] text-white font-bold py-2.5 px-4 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center text-sm">
+                                <i class="fab fa-whatsapp mr-2"></i>
                                 Send via WhatsApp
                             </button>
                         </div>
@@ -605,6 +582,6 @@
     <!-- Load configuration first -->
     <script src="config/app.config.js"></script>
     <!-- Load main application -->
-    <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/main.js?v=nav23"></script>
 </body>
 </html>
