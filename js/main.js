@@ -12,6 +12,7 @@ import ContactForm from './modules/ContactForm.js?v=nav22';
 import Donation from './modules/Donation.js?v=nav22';
 import HeroTypewriter from './modules/HeroTypewriter.js?v=nav22';
 import HeroPhoneTour from './modules/HeroPhoneTour.js?v=nav22';
+import SponsorLearner from './modules/SponsorLearner.js?v=nav24';
 import Router from './modules/Router.js?v=nav22';
 import { initSmoothScroll } from './utils/smoothScroll.js?v=nav22';
 
@@ -53,7 +54,8 @@ class App {
         new BackToTop(),
         new ComingSoonModal(),
         new ContactForm(),
-        new Donation()
+        new Donation(),
+        new SponsorLearner()
       ];
 
       // Initialize utilities
@@ -75,7 +77,7 @@ class App {
   initRoutes() {
     // Define routes that require specific actions
     // Most sections use smooth scroll, but we can add specific logic here
-    const sections = ['download', 'purpose', 'features', 'donate', 'contact'];
+    const sections = ['download', 'purpose', 'features', 'sponsor', 'donate', 'contact'];
     
     sections.forEach(route => {
       Router.addRoute(route, (r) => {
