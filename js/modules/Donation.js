@@ -4,6 +4,11 @@
  */
 
 import { getElementById, addEventListener, querySelector } from '../utils/dom.js';
+import {
+  isKeyConfigured,
+  loadPaystackScript as loadPaystack,
+  openCheckout
+} from '../utils/paystack.js';
 
 class Donation {
   constructor() {
@@ -38,11 +43,7 @@ class Donation {
    */
   init() {
     // Check if Paystack key is configured (not placeholder)
-    const isPlaceholder = !this.paystackPublicKey || 
-                         this.paystackPublicKey.includes('YOUR_PUBLIC_KEY') ||
-                         this.paystackPublicKey.trim() === '';
-    
-    if (isPlaceholder) {
+    if (!isKeyConfigured(this.paystackPublicKey)) {
       console.warn('Paystack public key not configured. Please add your Paystack public key in config/app.config.js');
       // Still setup the button to show an error message
       if (this.donateButton) {
@@ -90,26 +91,7 @@ class Donation {
    * Load Paystack inline script
    */
   loadPaystackScript() {
-    if (window.PaystackPop) {
-      return; // Already loaded
-    }
-
-    // Check if script is already being loaded
-    const existingScript = document.querySelector('script[src="https://js.paystack.co/v1/inline.js"]');
-    if (existingScript) {
-      return;
-    }
-
-    const script = document.createElement('script');
-    script.src = 'https://js.paystack.co/v1/inline.js';
-    script.async = true;
-    script.onload = () => {
-      console.log('Paystack script loaded');
-    };
-    script.onerror = () => {
-      console.error('Failed to load Paystack script');
-    };
-    document.head.appendChild(script);
+    loadPaystack().catch((error) => console.error(error.message));
   }
 
   /**
@@ -250,56 +232,32 @@ class Donation {
 
   /**
    * Process payment with Paystack
-   * @param {number} amount - Amount in kobo (cents)
+   * @param {number} amount - Amount in cents
    * @param {string} email - Donor email
    * @param {string} name - Donor name
    */
   processPayment(amount, email, name) {
-    if (!window.PaystackPop) {
-      alert('Payment system is loading. Please try again in a moment.');
-      return;
-    }
-
-    const isPlaceholder = !this.paystackPublicKey || 
-                         this.paystackPublicKey.includes('YOUR_PUBLIC_KEY') ||
-                         this.paystackPublicKey.trim() === '';
-    
-    if (isPlaceholder) {
+    if (!isKeyConfigured(this.paystackPublicKey)) {
       alert('Paystack is not properly configured. Please contact the administrator.');
       return;
     }
 
-    try {
-      const handler = window.PaystackPop.setup({
-        key: this.paystackPublicKey,
-        email: email,
-        amount: amount,
-        currency: 'ZAR',
-        ref: `NOVAR_${Date.now()}`,
-        metadata: {
-          custom_fields: [
-            {
-              display_name: 'Donor Name',
-              variable_name: 'donor_name',
-              value: name
-            }
-          ]
-        },
-        callback: (response) => {
-          console.log('Payment callback:', response);
-          this.handlePaymentSuccess(response);
-        },
-        onClose: () => {
-          console.log('Payment window closed');
-          this.handlePaymentClose();
-        }
-      });
-
-      handler.openIframe();
-    } catch (error) {
+    openCheckout({
+      key: this.paystackPublicKey,
+      email,
+      amount,
+      reference: `NOVAR_${Date.now()}`,
+      metadata: {
+        custom_fields: [
+          { display_name: 'Donor Name', variable_name: 'donor_name', value: name }
+        ]
+      },
+      onSuccess: (response) => this.handlePaymentSuccess(response),
+      onClose: () => this.handlePaymentClose()
+    }).catch((error) => {
       console.error('Error processing payment:', error);
       alert('An error occurred while processing your payment. Please try again.');
-    }
+    });
   }
 
   /**
