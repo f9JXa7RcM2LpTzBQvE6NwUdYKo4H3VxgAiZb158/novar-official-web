@@ -46,9 +46,19 @@ const AppConfig = {
     publicKey: 'pk_live_8ef4b153100191894aaa7e9ab4e9aca0c1ae7cd3'
   },
 
+  // Sponsorship (sponsor-a-learner)
+  sponsorship: {
+    pricePerLearnerPerMonth: 10.81,
+    goal: 15400,
+    learnersSponsored: 0,   // update by hand as sponsorships come in
+    learnersPerTile: 100,
+    presets: [1, 2, 5, 10]
+  },
+
   // Selectors
   selectors: {
     nav: '#main-nav',
+    sponsorButton: '#sponsor-button',
     mobileMenuButton: '#mobile-menu-button',
     mobileMenu: '#mobile-menu',
     mobileMenuOverlay: '#mobile-menu-overlay',

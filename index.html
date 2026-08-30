@@ -16,7 +16,7 @@
     
     <!-- External Stylesheets -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/main.css?v=nav23">
+    <link rel="stylesheet" href="css/main.css?v=nav24">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -83,6 +83,7 @@
                     <a href="#purpose" class="nav-link nav-pill-link" data-section="purpose">About</a>
                     <a href="#features" class="nav-link nav-pill-link" data-section="features">Leaders</a>
                     <a href="#donate" class="nav-link nav-pill-link" data-section="donate">Donate</a>
+                    <a href="#sponsor" class="nav-link nav-pill-link" data-section="sponsor">Sponsor</a>
                 </div>
 
                 <!-- Desktop actions -->
@@ -106,6 +107,7 @@
                     <a href="#purpose" class="nav-link nav-pill-panel-link" data-section="purpose">About</a>
                     <a href="#features" class="nav-link nav-pill-panel-link" data-section="features">Leaders</a>
                     <a href="#donate" class="nav-link nav-pill-panel-link" data-section="donate">Donate</a>
+                    <a href="#sponsor" class="nav-link nav-pill-panel-link" data-section="sponsor">Sponsor</a>
                     <a href="#contact" class="nav-link nav-pill-panel-link" data-section="contact">Contact</a>
                     <a href="#download" class="nav-pill-btn nav-pill-btn-primary nav-pill-panel-cta">Get the app</a>
                 </div>
@@ -337,6 +339,84 @@
                     <p class="text-base md:text-lg text-gray-600 leading-relaxed">
                         Liberty Group is a steadfast partner in NOVAR's journey, providing far more than financial support. Through its #DriveHope initiative, Liberty pledged R1 million to scale operations and keep education free for learners, while connecting the founders to mentors, SME coaches, and professional resources. They provided office space at Braamfontein and brand-new equipment, giving NOVAR the tools to innovate and grow. Liberty champions the app as a perfect match for its education-driven impact strategy, committing to a long-term partnership that guides, empowers, and strengthens NOVAR as it transforms education across South Africa.
                     </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sponsor a Learner Section -->
+    <section id="sponsor" class="py-12 md:py-16 bg-gradient-to-b from-white via-gray-50 to-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-8 md:mb-10 animate-on-scroll">
+                <span class="purpose-badge mb-3 inline-block">
+                    <i class="fas fa-graduation-cap mr-2"></i>
+                    Sponsor
+                </span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-2">
+                    Sponsor a <span class="gradient-text">learner</span>
+                </h2>
+                <p class="text-base md:text-lg text-gray-600 max-w-xl mx-auto">
+                    R10.81 gives a learner a month of NOVAR &mdash; curriculum-aligned lessons
+                    and content from top creators.
+                </p>
+            </div>
+
+            <div class="sponsor-layout">
+                <!-- Sponsor form -->
+                <div class="sponsor-card contact-card rounded-2xl p-5 md:p-6 animate-on-scroll">
+                    <form class="space-y-4" id="sponsor-form">
+                        <div>
+                            <label class="block text-gray-900 mb-2 font-semibold text-sm">How many learners?</label>
+                            <div class="sponsor-quantities grid grid-cols-4 gap-2" id="sponsor-quantities">
+                                <button type="button" data-learners="1" class="sponsor-qty-btn">1</button>
+                                <button type="button" data-learners="2" class="sponsor-qty-btn">2</button>
+                                <button type="button" data-learners="5" class="sponsor-qty-btn">5</button>
+                                <button type="button" data-learners="10" class="sponsor-qty-btn">10</button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-900 mb-1.5 font-semibold text-sm" for="sponsor-custom-quantity">Or enter a number</label>
+                            <input class="w-full px-3.5 py-2.5 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-dark focus:border-transparent transition-all text-gray-900 placeholder-gray-400"
+                                type="number" id="sponsor-custom-quantity" placeholder="e.g. 25" min="1" step="1">
+                        </div>
+
+                        <div class="sponsor-total-box rounded-xl p-4">
+                            <div class="sponsor-total" id="sponsor-total">R43.24</div>
+                            <div class="sponsor-breakdown" id="sponsor-breakdown">1 learner &times; 4 months to December</div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-gray-900 mb-1.5 font-semibold text-sm" for="sponsor-name">Name / Company *</label>
+                                <input class="w-full px-3.5 py-2.5 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-dark focus:border-transparent transition-all text-gray-900 placeholder-gray-400"
+                                    type="text" id="sponsor-name" placeholder="Your name or company" required>
+                            </div>
+                            <div>
+                                <label class="block text-gray-900 mb-1.5 font-semibold text-sm" for="sponsor-email">Email *</label>
+                                <input class="w-full px-3.5 py-2.5 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-dark focus:border-transparent transition-all text-gray-900 placeholder-gray-400"
+                                    type="email" id="sponsor-email" placeholder="Your email" required>
+                            </div>
+                        </div>
+
+                        <button type="button" id="sponsor-button" class="sponsor-submit w-full py-3 rounded-xl font-semibold">
+                            Sponsor a learner &rarr;
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Progress panel -->
+                <div class="sponsor-progress animate-on-scroll" aria-live="polite">
+                    <p class="sponsor-progress-label">Learners sponsored</p>
+                    <p class="sponsor-progress-figure">
+                        <span id="sponsor-progress-count">0</span>
+                        <span class="sponsor-progress-goal">of <span id="sponsor-progress-goal">15 400</span> learners</span>
+                    </p>
+                    <div class="sponsor-progress-track">
+                        <div class="sponsor-progress-bar" id="sponsor-progress-bar"></div>
+                    </div>
+                    <div class="sponsor-tiles" id="sponsor-tiles" aria-hidden="true"></div>
+                    <p class="sponsor-tile-note">Each tile is 100 learners.</p>
                 </div>
             </div>
         </div>

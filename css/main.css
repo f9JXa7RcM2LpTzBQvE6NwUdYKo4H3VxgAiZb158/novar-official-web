@@ -1374,3 +1374,142 @@ section[id] {
 }
 
 
+
+/* ---------- Sponsor a learner ---------- */
+
+.sponsor-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  max-width: 64rem;
+  margin: 0 auto;
+}
+
+@media (min-width: 1024px) {
+  .sponsor-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
+.sponsor-qty-btn {
+  padding: 0.625rem 0.5rem;
+  background: #fff;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #111827;
+  transition: all 0.2s ease;
+}
+
+.sponsor-qty-btn:hover {
+  border-color: #000;
+  background: #f9fafb;
+}
+
+.sponsor-qty-btn.active {
+  background: #000;
+  border-color: #000;
+  color: #fff;
+}
+
+.sponsor-total-box {
+  background: #f9fafb;
+  border: 2px solid #e5e7eb;
+}
+
+.sponsor-total {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1.1;
+}
+
+.sponsor-breakdown {
+  font-size: 0.8125rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+}
+
+.sponsor-submit {
+  background: #000;
+  color: #fff;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.sponsor-submit:hover {
+  transform: translateY(-2px);
+  opacity: 0.92;
+}
+
+.sponsor-progress {
+  background: #1a1333;
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  color: #fff;
+}
+
+.sponsor-progress-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.sponsor-progress-figure {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin: 0.35rem 0 1rem;
+}
+
+#sponsor-progress-count {
+  font-size: 2.75rem;
+  font-weight: 700;
+  color: #f0b429;
+  line-height: 1;
+}
+
+.sponsor-progress-goal {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.sponsor-progress-track {
+  height: 0.375rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+
+.sponsor-progress-bar {
+  height: 100%;
+  width: 0;
+  border-radius: 9999px;
+  background: #4ade80;
+  transition: width 0.6s ease;
+}
+
+.sponsor-tiles {
+  display: grid;
+  grid-template-columns: repeat(14, minmax(0, 1fr));
+  gap: 0.25rem;
+  margin: 1rem 0 0.75rem;
+}
+
+.sponsor-tile {
+  aspect-ratio: 1 / 1;
+  border-radius: 0.1875rem;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.sponsor-tile.is-filled {
+  background: #f0b429;
+}
+
+.sponsor-tile-note {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.55);
+}
