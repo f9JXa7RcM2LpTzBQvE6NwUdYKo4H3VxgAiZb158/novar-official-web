@@ -4,7 +4,7 @@
  * module can be unit-tested directly under `node --test`.
  */
 
-export const PRICE_PER_LEARNER_PER_MONTH = 10.81;
+export const PRICE_PER_LEARNER_PER_MONTH = 199.99;
 
 /**
  * Months a sponsorship covers: next month through December of `date`'s year.

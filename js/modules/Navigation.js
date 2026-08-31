@@ -24,15 +24,11 @@ class Navigation {
       return;
     }
 
-    // Set initial state - glass effect at top
-    addClass(this.nav, 'nav-glass');
-
-    // Handle scroll events with throttling
+    // Floating pill nav — no glass/transparent toggle needed
     let ticking = false;
     window.addEventListener('scroll', () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          this.handleScroll();
           this.updateActiveLinkFromScroll();
           ticking = false;
         });
@@ -50,14 +46,6 @@ class Navigation {
       const currentRoute = Router.getCurrentRoute();
       this.setActiveLink(currentRoute);
     }, 100);
-  }
-
-  /**
-   * Handle scroll event
-   */
-  handleScroll() {
-    removeClass(this.nav, 'nav-transparent');
-    addClass(this.nav, 'nav-glass');
   }
 
   /**
@@ -99,21 +87,13 @@ class Navigation {
    */
   setActiveLink(route) {
     const navLinks = document.querySelectorAll('.nav-link[data-section]');
-    
+
     navLinks.forEach(link => {
       const linkSection = link.getAttribute('data-section');
-      const underline = link.querySelector('.nav-underline');
-      
       if (linkSection === route) {
         link.classList.add('active');
-        if (underline) {
-          underline.style.width = '100%';
-        }
       } else {
         link.classList.remove('active');
-        if (underline) {
-          underline.style.width = '0';
-        }
       }
     });
   }

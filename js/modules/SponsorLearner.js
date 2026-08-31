@@ -30,6 +30,7 @@ class SponsorLearner {
 
     this.quantities = document.getElementById('sponsor-quantities');
     this.customInput = document.getElementById('sponsor-custom-quantity');
+    this.amountInput = document.getElementById('sponsor-amount');
     this.totalEl = document.getElementById('sponsor-total');
     this.breakdownEl = document.getElementById('sponsor-breakdown');
     this.nameInput = document.getElementById('sponsor-name');
@@ -38,6 +39,7 @@ class SponsorLearner {
 
     this.months = monthsUntilDecember(new Date());
     this.learnerCount = 1;
+    this.mode = 'sponsor';   // 'sponsor' = N learners, 'amount' = free-form gift
 
     this.init();
   }
@@ -53,6 +55,20 @@ class SponsorLearner {
       const raw = this.customInput.value;
       if (raw === '') return;
       if (isValidLearnerCount(raw)) this.setCount(parseInt(raw, 10), { fromPreset: false });
+    });
+
+    this.amountInput?.addEventListener('input', () => {
+      const raw = this.amountInput.value;
+      if (raw === '' || Number(raw) <= 0) {
+        this.mode = 'sponsor';
+        this.setCount(this.learnerCount, { fromPreset: true });
+        return;
+      }
+      this.mode = 'amount';
+      if (this.customInput) this.customInput.value = '';
+      this.quantities?.querySelectorAll('button[data-learners]')
+        .forEach((btn) => btn.classList.remove('active'));
+      this.renderTotal();
     });
 
     this.button?.addEventListener('click', (e) => {
@@ -75,6 +91,8 @@ class SponsorLearner {
    */
   setCount(count, { fromPreset }) {
     this.learnerCount = count;
+    this.mode = 'sponsor';
+    if (this.amountInput) this.amountInput.value = '';
 
     this.quantities?.querySelectorAll('button[data-learners]').forEach((btn) => {
       const matches = fromPreset && parseInt(btn.getAttribute('data-learners'), 10) === count;
@@ -86,14 +104,29 @@ class SponsorLearner {
     this.renderTotal();
   }
 
+  /** @returns {number} the amount to charge, in rands, for the active mode */
+  currentTotal() {
+    if (this.mode === 'amount') return Number(this.amountInput?.value) || 0;
+    return calculateTotal(this.learnerCount, new Date(), this.pricePerMonth);
+  }
+
   renderTotal() {
-    const total = calculateTotal(this.learnerCount, new Date(), this.pricePerMonth);
+    const total = this.currentTotal();
     if (this.totalEl) this.totalEl.textContent = `R${total.toFixed(2)}`;
+
     if (this.breakdownEl) {
-      const learnerWord = this.learnerCount === 1 ? 'learner' : 'learners';
-      const monthWord = this.months === 1 ? 'month' : 'months';
-      this.breakdownEl.textContent =
-        `${this.learnerCount} ${learnerWord} × ${this.months} ${monthWord} to December`;
+      if (this.mode === 'amount') {
+        this.breakdownEl.textContent = 'One-off gift to NOVAR';
+      } else {
+        const learnerWord = this.learnerCount === 1 ? 'learner' : 'learners';
+        const monthWord = this.months === 1 ? 'month' : 'months';
+        this.breakdownEl.textContent =
+          `${this.learnerCount} ${learnerWord} × ${this.months} ${monthWord} to December`;
+      }
+    }
+
+    if (this.button) {
+      this.button.textContent = this.mode === 'amount' ? 'Give →' : 'Sponsor a learner →';
     }
   }
 
@@ -109,30 +142,42 @@ class SponsorLearner {
     }
     if (panel) panel.hidden = false;
 
-    const countEl = document.getElementById('sponsor-progress-count');
-    const goalEl = document.getElementById('sponsor-progress-goal');
-    const barEl = document.getElementById('sponsor-progress-bar');
+    const pct = Math.min(100, (this.sponsored / this.goal) * 100);
+    const remaining = Math.max(0, this.goal - this.sponsored);
+
+    const set = (id, value) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = value;
+    };
+    set('sponsor-progress-pct', pct.toFixed(1));
+    set('sponsor-progress-count', this.sponsored.toLocaleString(LOCALE));
+    set('sponsor-progress-goal', this.goal.toLocaleString(LOCALE));
+    set('sponsor-progress-remaining', remaining.toLocaleString(LOCALE));
+
     const tilesEl = document.getElementById('sponsor-tiles');
+    if (!tilesEl) return;
 
-    if (countEl) countEl.textContent = this.sponsored.toLocaleString(LOCALE);
-    if (goalEl) goalEl.textContent = this.goal.toLocaleString(LOCALE);
+    // One tile per `learnersPerTile`; at 300 per tile against a 30 000 goal
+    // that is 100 tiles, so each tile is exactly 1%.
+    const tileCount = Math.round(this.goal / this.learnersPerTile);
+    const filled = Math.min(tileCount, Math.floor(this.sponsored / this.learnersPerTile));
 
-    if (barEl && this.goal > 0) {
-      const pct = Math.min(100, (this.sponsored / this.goal) * 100);
-      barEl.style.width = `${pct}%`;
-    }
-
-    if (tilesEl && this.goal > 0) {
-      const tileCount = Math.ceil(this.goal / this.learnersPerTile);
-      const filled = Math.floor(this.sponsored / this.learnersPerTile);
-      tilesEl.innerHTML = Array.from({ length: tileCount }, (_, i) =>
-        `<span class="sponsor-tile${i < filled ? ' is-filled' : ''}"></span>`
-      ).join('');
-    }
+    tilesEl.innerHTML = Array.from({ length: tileCount }, (_, i) => {
+      let cls = 'sponsor-tile';
+      if (i < filled) cls += ' is-filled';
+      else if (i === filled) cls += ' is-next';   // the next tile to fund
+      return `<span class="${cls}"></span>`;
+    }).join('');
   }
 
   validate() {
-    if (!isValidLearnerCount(this.learnerCount)) {
+    if (this.mode === 'amount') {
+      if (!(Number(this.amountInput?.value) > 0)) {
+        alert('Please enter an amount to give.');
+        this.amountInput?.focus();
+        return false;
+      }
+    } else if (!isValidLearnerCount(this.learnerCount)) {
       alert('Please choose how many learners you would like to sponsor.');
       return false;
     }
@@ -159,23 +204,29 @@ class SponsorLearner {
       return;
     }
 
-    const total = calculateTotal(this.learnerCount, new Date(), this.pricePerMonth);
+    const total = this.currentTotal();
     const amount = toCents(total);
+    const isGift = this.mode === 'amount';
 
     openCheckout({
       key: this.paystackPublicKey,
       email: this.emailInput.value,
       amount,
-      reference: `NOVAR_SPONSOR_${Date.now()}`,
+      reference: `${isGift ? 'NOVAR_GIFT' : 'NOVAR_SPONSOR'}_${Date.now()}`,
       metadata: {
         custom_fields: [
-          { display_name: 'Sponsor', variable_name: 'sponsor_name', value: this.nameInput.value },
-          { display_name: 'Learners Sponsored', variable_name: 'learners_sponsored', value: String(this.learnerCount) },
-          { display_name: 'Months Covered', variable_name: 'months_covered', value: `${this.months} (to December)` }
+          { display_name: 'Name', variable_name: 'sponsor_name', value: this.nameInput.value },
+          { display_name: 'Type', variable_name: 'contribution_type', value: isGift ? 'donation' : 'sponsorship' },
+          ...(isGift ? [] : [
+            { display_name: 'Learners Sponsored', variable_name: 'learners_sponsored', value: String(this.learnerCount) },
+            { display_name: 'Months Covered', variable_name: 'months_covered', value: `${this.months} (to December)` }
+          ])
         ]
       },
       onSuccess: () => {
-        alert(`Thank you! You have sponsored ${this.learnerCount} learner(s) until December.`);
+        alert(isGift
+          ? 'Thank you for supporting NOVAR.'
+          : `Thank you! You have sponsored ${this.learnerCount} learner(s) until December.`);
         this.reset();
       },
       onClose: () => console.log('Sponsorship checkout closed')
@@ -188,6 +239,8 @@ class SponsorLearner {
   reset() {
     if (this.nameInput) this.nameInput.value = '';
     if (this.emailInput) this.emailInput.value = '';
+    if (this.amountInput) this.amountInput.value = '';
+    this.mode = 'sponsor';
     this.setCount(1, { fromPreset: true });
   }
 }

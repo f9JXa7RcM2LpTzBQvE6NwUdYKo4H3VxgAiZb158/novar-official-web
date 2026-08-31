@@ -1,101 +1,90 @@
 /**
  * Mobile Menu Module
- * Handles mobile menu toggle and animations
+ * Expands the floating pill nav downward to reveal tabs
  */
 
-import { getElementById, toggleClass, addClass, removeClass, setStyle, hasClass } from '../utils/dom.js';
+import { getElementById, addClass, removeClass, setStyle } from '../utils/dom.js?v=nav15';
 
 class MobileMenu {
   constructor() {
     const config = window.AppConfig || {};
     const selectors = config.selectors || {};
-    
-    // Helper to strip # from selector if present
+
     const getId = (selector) => {
       if (!selector) return null;
       return selector.startsWith('#') ? selector.substring(1) : selector;
     };
-    
+
     this.menuButton = getElementById(getId(selectors.mobileMenuButton) || 'mobile-menu-button');
-    this.menu = getElementById(getId(selectors.mobileMenu) || 'mobile-menu');
+    this.pill = getElementById('nav-pill');
     this.overlay = getElementById(getId(selectors.mobileMenuOverlay) || 'mobile-menu-overlay');
     this.body = document.body;
     this.isOpen = false;
-    
-    console.log('MobileMenu initialized', {
-      menuButton: !!this.menuButton,
-      menu: !!this.menu,
-      overlay: !!this.overlay
-    });
-    
+    this.breakpoint = (config.navigation && config.navigation.mobileBreakpoint) || 768;
+
     this.init();
   }
 
-  /**
-   * Initialize mobile menu
-   */
   init() {
-    if (!this.menuButton || !this.menu || !this.overlay) {
-      console.warn('Mobile menu elements not found');
+    if (!this.menuButton || !this.pill || !this.overlay) {
+      console.warn('Expandable nav elements not found', {
+        button: !!this.menuButton,
+        pill: !!this.pill,
+        overlay: !!this.overlay
+      });
       return;
     }
 
-    // Add event listeners
-    this.menuButton.addEventListener('click', () => this.toggle());
+    this.menuButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      this.toggle();
+    });
+
     this.overlay.addEventListener('click', () => this.close());
-    
-    // Close menu when clicking navigation links
-    this.setupNavigationLinks();
-  }
 
-  /**
-   * Toggle mobile menu
-   */
-  toggle() {
-    if (this.isOpen) {
-      this.close();
-    } else {
-      this.open();
-    }
-  }
-
-  /**
-   * Open mobile menu
-   */
-  open() {
-    addClass(this.menu, 'active');
-    addClass(this.overlay, 'active');
-    addClass(this.menuButton, 'active');
-    setStyle(this.body, 'overflow', 'hidden');
-    this.isOpen = true;
-  }
-
-  /**
-   * Close mobile menu
-   */
-  close() {
-    removeClass(this.menu, 'active');
-    removeClass(this.overlay, 'active');
-    removeClass(this.menuButton, 'active');
-    setStyle(this.body, 'overflow', '');
-    this.isOpen = false;
-  }
-
-  /**
-   * Setup navigation links to close menu on click
-   */
-  setupNavigationLinks() {
-    const config = window.AppConfig || {};
-    const navigation = config.navigation || {};
-    const mobileBreakpoint = navigation.mobileBreakpoint || 768;
-    const navLinks = this.menu.querySelectorAll('a[href^="#"]');
-    navLinks.forEach(link => {
+    this.pill.querySelectorAll('.nav-pill-panel a').forEach((link) => {
       link.addEventListener('click', () => {
-        if (window.innerWidth < mobileBreakpoint && this.isOpen) {
+        if (window.innerWidth < this.breakpoint && this.isOpen) {
           this.close();
         }
       });
     });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= this.breakpoint && this.isOpen) {
+        this.close();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && this.isOpen) this.close();
+    });
+  }
+
+  toggle() {
+    if (this.isOpen) this.close();
+    else this.open();
+  }
+
+  open() {
+    addClass(this.pill, 'nav-pill--open');
+    addClass(this.overlay, 'active');
+    addClass(this.menuButton, 'active');
+    this.menuButton.setAttribute('aria-expanded', 'true');
+    this.menuButton.setAttribute('aria-label', 'Close menu');
+    setStyle(this.body, 'overflow', 'hidden');
+    this.isOpen = true;
+  }
+
+  close() {
+    removeClass(this.pill, 'nav-pill--open');
+    removeClass(this.overlay, 'active');
+    removeClass(this.menuButton, 'active');
+    this.menuButton.setAttribute('aria-expanded', 'false');
+    this.menuButton.setAttribute('aria-label', 'Open menu');
+    setStyle(this.body, 'overflow', '');
+    this.isOpen = false;
   }
 }
 

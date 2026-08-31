@@ -8,8 +8,8 @@ import {
   isValidLearnerCount
 } from '../js/utils/sponsorshipPricing.js';
 
-test('price constant is R10.81', () => {
-  assert.equal(PRICE_PER_LEARNER_PER_MONTH, 10.81);
+test('price constant is R199.99', () => {
+  assert.equal(PRICE_PER_LEARNER_PER_MONTH, 199.99);
 });
 
 test('monthsUntilDecember counts next month through December', () => {
@@ -29,26 +29,25 @@ test('December clamps to 1 month, never 0', () => {
 });
 
 test('August 2026 totals match the agreed figures', () => {
-  const aug = new Date(2026, 7, 30);
-  assert.equal(calculateTotal(1, aug).toFixed(2), '43.24');
-  assert.equal(calculateTotal(2, aug).toFixed(2), '86.48');
-  assert.equal(calculateTotal(3, aug).toFixed(2), '129.72');
-  assert.equal(calculateTotal(5, aug).toFixed(2), '216.20');
-  assert.equal(calculateTotal(10, aug).toFixed(2), '432.40');
+  const aug = new Date(2026, 7, 31);
+  assert.equal(calculateTotal(1, aug).toFixed(2), '799.96');
+  assert.equal(calculateTotal(2, aug).toFixed(2), '1599.92');
+  assert.equal(calculateTotal(5, aug).toFixed(2), '3999.80');
+  assert.equal(calculateTotal(10, aug).toFixed(2), '7999.60');
 });
 
 test('total tracks the shrinking month count', () => {
-  assert.equal(calculateTotal(1, new Date(2026, 8, 15)).toFixed(2), '32.43');
-  assert.equal(calculateTotal(1, new Date(2026, 10, 15)).toFixed(2), '10.81');
-  assert.equal(calculateTotal(1, new Date(2026, 11, 15)).toFixed(2), '10.81');
+  assert.equal(calculateTotal(1, new Date(2026, 8, 15)).toFixed(2), '599.97');
+  assert.equal(calculateTotal(1, new Date(2026, 10, 15)).toFixed(2), '199.99');
+  assert.equal(calculateTotal(1, new Date(2026, 11, 15)).toFixed(2), '199.99');
 });
 
 test('toCents rounds once, absorbing float error', () => {
-  const aug = new Date(2026, 7, 30);
-  assert.equal(toCents(calculateTotal(1, aug)), 4324);
-  assert.equal(toCents(calculateTotal(3, aug)), 12972);
-  assert.equal(toCents(calculateTotal(5, aug)), 21620);
-  assert.equal(toCents(calculateTotal(10, aug)), 43240);
+  const aug = new Date(2026, 7, 31);
+  assert.equal(toCents(calculateTotal(1, aug)), 79996);
+  assert.equal(toCents(calculateTotal(3, aug)), 239988);
+  assert.equal(toCents(calculateTotal(5, aug)), 399980);
+  assert.equal(toCents(calculateTotal(10, aug)), 799960);
 });
 
 test('isValidLearnerCount accepts positive integers only', () => {

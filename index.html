@@ -16,7 +16,7 @@
     
     <!-- External Stylesheets -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/main.css?v=nav24">
+    <link rel="stylesheet" href="css/main.css?v=nav26">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -82,7 +82,6 @@
                     <a href="#download" class="nav-link nav-pill-link" data-section="download">Download</a>
                     <a href="#purpose" class="nav-link nav-pill-link" data-section="purpose">About</a>
                     <a href="#features" class="nav-link nav-pill-link" data-section="features">Leaders</a>
-                    <a href="#donate" class="nav-link nav-pill-link" data-section="donate">Donate</a>
                     <a href="#sponsor" class="nav-link nav-pill-link" data-section="sponsor">Sponsor</a>
                 </div>
 
@@ -106,7 +105,6 @@
                     <a href="#download" class="nav-link nav-pill-panel-link" data-section="download">Download</a>
                     <a href="#purpose" class="nav-link nav-pill-panel-link" data-section="purpose">About</a>
                     <a href="#features" class="nav-link nav-pill-panel-link" data-section="features">Leaders</a>
-                    <a href="#donate" class="nav-link nav-pill-panel-link" data-section="donate">Donate</a>
                     <a href="#sponsor" class="nav-link nav-pill-panel-link" data-section="sponsor">Sponsor</a>
                     <a href="#contact" class="nav-link nav-pill-panel-link" data-section="contact">Contact</a>
                     <a href="#download" class="nav-pill-btn nav-pill-btn-primary nav-pill-panel-cta">Get the app</a>
@@ -356,8 +354,8 @@
                     Sponsor a <span class="gradient-text">learner</span>
                 </h2>
                 <p class="text-base md:text-lg text-gray-600 max-w-xl mx-auto">
-                    R10.81 gives a learner a month of NOVAR &mdash; curriculum-aligned lessons
-                    and content from top creators.
+                    R199.99 gives a learner a month of NOVAR &mdash; curriculum-aligned lessons
+                    and content from top creators. Sponsor as many as you like, through to December.
                 </p>
             </div>
 
@@ -379,6 +377,14 @@
                             <label class="block text-gray-900 mb-1.5 font-semibold text-sm" for="sponsor-custom-quantity">Or enter a number</label>
                             <input class="w-full px-3.5 py-2.5 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-dark focus:border-transparent transition-all text-gray-900 placeholder-gray-400"
                                 type="number" id="sponsor-custom-quantity" placeholder="e.g. 25" min="1" step="1">
+                        </div>
+
+                        <div class="sponsor-or"><span>or</span></div>
+
+                        <div>
+                            <label class="block text-gray-900 mb-1.5 font-semibold text-sm" for="sponsor-amount">Give any amount (ZAR)</label>
+                            <input class="w-full px-3.5 py-2.5 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-dark focus:border-transparent transition-all text-gray-900 placeholder-gray-400"
+                                type="number" id="sponsor-amount" placeholder="e.g. 500" min="1" step="1">
                         </div>
 
                         <div class="sponsor-total-box rounded-xl p-4">
@@ -408,113 +414,24 @@
                 <!-- Progress panel -->
                 <div class="sponsor-progress animate-on-scroll" aria-live="polite">
                     <p class="sponsor-progress-label">Learners sponsored</p>
-                    <p class="sponsor-progress-figure">
-                        <span id="sponsor-progress-count">0</span>
-                        <span class="sponsor-progress-goal">of <span id="sponsor-progress-goal">15 403</span> learners</span>
-                    </p>
-                    <div class="sponsor-progress-track">
-                        <div class="sponsor-progress-bar" id="sponsor-progress-bar"></div>
+
+                    <div class="sponsor-progress-head">
+                        <p class="sponsor-pct"><span id="sponsor-progress-pct">0.0</span><span class="sponsor-pct-sign">%</span></p>
+                        <p class="sponsor-remaining"><span id="sponsor-progress-remaining">30 000</span> to go</p>
                     </div>
-                    <div class="sponsor-tiles" id="sponsor-tiles" aria-hidden="true"></div>
-                    <p class="sponsor-tile-note">Each tile is 100 learners.</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Donation Section -->
-    <section id="donate" class="py-12 md:py-16 bg-gradient-to-b from-white via-gray-50 to-white">
-        <div class="container mx-auto px-4">
-            <!-- Header -->
-            <div class="text-center mb-8 md:mb-10 animate-on-scroll">
-                <span class="purpose-badge mb-3 inline-block">
-                    <i class="fas fa-heart mr-2"></i>
-                    Support NOVAR
-                </span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-2">
-                    Donate to <span class="gradient-text">NOVAR App</span>
-                </h2>
-                <p class="text-base md:text-lg text-gray-600 max-w-xl mx-auto">
-                    Your support helps us keep quality education accessible for learners worldwide.
-                </p>
-            </div>
-            
-            <div class="max-w-xl mx-auto">
-                <div class="donation-card contact-card rounded-2xl p-5 md:p-6 animate-on-scroll">
-                    <form class="space-y-4" id="donation-form">
-                        <!-- Preset Amounts -->
-                        <div>
-                            <label class="block text-gray-900 mb-2 font-semibold text-sm">Select Amount (ZAR)</label>
-                            <div class="preset-amounts grid grid-cols-4 gap-2">
-                                <button type="button" data-amount="50" class="preset-amount-btn py-2.5 px-2 bg-white border-2 border-gray-200 rounded-xl hover:border-dark hover:bg-gray-50 transition-all font-semibold text-sm text-gray-900">
-                                    R 50
-                                </button>
-                                <button type="button" data-amount="100" class="preset-amount-btn py-2.5 px-2 bg-white border-2 border-gray-200 rounded-xl hover:border-dark hover:bg-gray-50 transition-all font-semibold text-sm text-gray-900">
-                                    R 100
-                                </button>
-                                <button type="button" data-amount="250" class="preset-amount-btn py-2.5 px-2 bg-white border-2 border-gray-200 rounded-xl hover:border-dark hover:bg-gray-50 transition-all font-semibold text-sm text-gray-900">
-                                    R 250
-                                </button>
-                                <button type="button" data-amount="500" class="preset-amount-btn py-2.5 px-2 bg-white border-2 border-gray-200 rounded-xl hover:border-dark hover:bg-gray-50 transition-all font-semibold text-sm text-gray-900">
-                                    R 500
-                                </button>
-                            </div>
+                    <p class="sponsor-progress-figure">
+                        <span id="sponsor-progress-count">0</span> of <span id="sponsor-progress-goal">30 000</span> learners
+                    </p>
+
+                    <div class="sponsor-grid-wrap">
+                        <div class="sponsor-tiles" id="sponsor-tiles" aria-hidden="true"></div>
+                        <div class="sponsor-axis" aria-hidden="true">
+                            <span>20</span><span>40</span><span>60</span><span>80</span><span>100</span>
                         </div>
+                    </div>
 
-                        <!-- Custom Amount -->
-                        <div>
-                            <label class="block text-gray-900 mb-1.5 font-semibold text-sm" for="custom-amount">Custom amount (ZAR)</label>
-                            <input 
-                                class="w-full px-3.5 py-2.5 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-dark focus:border-transparent transition-all text-gray-900 placeholder-gray-400" 
-                                type="number" 
-                                id="custom-amount" 
-                                placeholder="Enter amount"
-                                min="1"
-                                step="1"
-                            >
-                            <input type="hidden" id="donation-amount" value="">
-                        </div>
-
-                        <!-- Donor Information -->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <div>
-                                <label class="block text-gray-900 mb-1.5 font-semibold text-sm" for="donation-name">Full Name *</label>
-                                <input 
-                                    class="w-full px-3.5 py-2.5 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-dark focus:border-transparent transition-all text-gray-900 placeholder-gray-400" 
-                                    type="text" 
-                                    id="donation-name" 
-                                    placeholder="Your name"
-                                    required
-                                >
-                            </div>
-                            
-                            <div>
-                                <label class="block text-gray-900 mb-1.5 font-semibold text-sm" for="donation-email">Email *</label>
-                                <input 
-                                    class="w-full px-3.5 py-2.5 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-dark focus:border-transparent transition-all text-gray-900 placeholder-gray-400" 
-                                    type="email" 
-                                    id="donation-email" 
-                                    placeholder="Your email"
-                                    required
-                                >
-                            </div>
-                        </div>
-
-                        <!-- Donate Button -->
-                        <button 
-                            type="button" 
-                            id="donate-button" 
-                            class="w-full bg-dark hover:bg-gray-800 active:bg-gray-900 text-white font-bold py-3 px-5 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center"
-                        >
-                            <i class="fas fa-heart mr-2"></i>
-                            Donate Now
-                        </button>
-
-                        <p class="text-center text-xs text-gray-500 !mt-2.5">
-                            <i class="fas fa-lock mr-1"></i>
-                            Secure payment powered by Paystack
-                        </p>
-                    </form>
+                    <p class="sponsor-tile-note">Each tile is 1% &mdash; 300 learners</p>
                 </div>
             </div>
         </div>
@@ -660,8 +577,8 @@
 
     <!-- JavaScript Files -->
     <!-- Load configuration first -->
-    <script src="config/app.config.js?v=nav24"></script>
+    <script src="config/app.config.js?v=nav25"></script>
     <!-- Load main application -->
-    <script type="module" src="js/main.js?v=nav24"></script>
+    <script type="module" src="js/main.js?v=nav25"></script>
 </body>
 </html>
