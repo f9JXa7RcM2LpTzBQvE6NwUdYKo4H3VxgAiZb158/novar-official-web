@@ -46,6 +46,18 @@ const AppConfig = {
     publicKey: 'pk_live_8ef4b153100191894aaa7e9ab4e9aca0c1ae7cd3'
   },
 
+  // Motion layer. Set `enabled: false` to switch every effect below off in
+  // one place — the page falls back to its static styling with no other
+  // change. Individual effects can also be toggled on their own.
+  // All of it is skipped automatically under prefers-reduced-motion.
+  motion: {
+    enabled: true,
+    tilt: true,        // hero phone leans toward the pointer
+    counters: true,    // figures count up when scrolled into view
+    tiles: true,       // sponsor tile grid cascades in
+    magnetic: true     // primary buttons pull slightly toward the cursor
+  },
+
   // Schools using NOVAR — add an entry here to drop a new pin on the map.
   // `confirmed: false` means the coordinates are approximate and the pin
   // renders with a "location approximate" note in its popup.

@@ -1,0 +1,149 @@
+/* ============================================
+   MOTION LAYER
+   Every rule here is scoped under html.motion-on, which Motion.js adds only
+   when AppConfig.motion.enabled is true and the visitor has not asked for
+   reduced motion. Set motion.enabled to false, or delete this file and its
+   <link>, and the page returns to its static styling unchanged.
+   ============================================ */
+
+/* ---------- Hero phone: pointer-tracked depth ---------- */
+
+/* The static hover tilt is replaced by live pointer tracking. Variables are
+   written by Motion.js; they rest at 0 so the phone sits square until the
+   pointer arrives. */
+.motion-on .phone-mockup-inner {
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  --tilt-lift: 0px;
+  transform: perspective(1100px)
+             rotateX(var(--tilt-x))
+             rotateY(var(--tilt-y))
+             translateZ(var(--tilt-lift));
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.motion-on .phone-mockup-inner.is-tracking {
+  /* Follow the pointer closely while it is over the hero; the slower
+     transition above takes over on exit and eases the phone back. */
+  transition: transform 0.12s ease-out;
+}
+
+/* The static hover rule would fight the tracked transform. */
+.motion-on .phone-mockup:hover .phone-mockup-inner {
+  transform: perspective(1100px)
+             rotateX(var(--tilt-x))
+             rotateY(var(--tilt-y))
+             translateZ(var(--tilt-lift));
+}
+
+/* ---------- Sponsor tiles: cascade in ---------- */
+
+.motion-on .sponsor-tiles .sponsor-tile {
+  opacity: 0;
+  transform: scale(0.72);
+  transition: opacity 0.32s ease, transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--i, 0) * 7ms);
+}
+
+.motion-on .sponsor-tiles.is-revealed .sponsor-tile {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ---------- Map pin: drop and pulse ---------- */
+
+.motion-on .school-pin-inner {
+  animation: pinDrop 0.62s cubic-bezier(0.2, 1.35, 0.4, 1) both;
+}
+
+@keyframes pinDrop {
+  0%   { transform: rotate(-45deg) translate(0, -26px) scale(0.7); opacity: 0; }
+  60%  { opacity: 1; }
+  100% { transform: rotate(-45deg) translate(0, 0) scale(1); opacity: 1; }
+}
+
+/* A ring easing outward from the pin — reads as live telemetry rather than
+   a static marker. Sits behind the pin and ignores pointer events. */
+.motion-on .school-pin::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 46px;
+  height: 46px;
+  margin: -23px 0 0 -23px;
+  border-radius: 50%;
+  border: 2px solid rgba(15, 118, 110, 0.55);
+  animation: pinRadar 2.8s ease-out infinite;
+  animation-delay: 0.6s;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes pinRadar {
+  0%   { transform: scale(0.6); opacity: 0.75; }
+  70%  { transform: scale(2.6); opacity: 0; }
+  100% { transform: scale(2.6); opacity: 0; }
+}
+
+/* ---------- Magnetic buttons ---------- */
+
+.motion-on .is-magnetic {
+  --mag-x: 0px;
+  --mag-y: 0px;
+  transform: translate(var(--mag-x), var(--mag-y));
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+              background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.motion-on .is-magnetic.is-pulling {
+  transition: transform 0.1s ease-out, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* The sponsor CTA already lifts on hover; keep that on top of the pull. */
+.motion-on .sponsor-submit.is-magnetic:hover,
+.motion-on .sponsor-donate.is-magnetic:hover {
+  transform: translate(var(--mag-x), calc(var(--mag-y) - 2px));
+}
+
+/* ---------- Counting figures ---------- */
+
+/* Fixed digit width stops the layout jittering while a number ticks up. */
+.motion-on .is-counting {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Leaderboard rows on tab change ---------- */
+
+.motion-on .board-panel:not([hidden]) .board-row {
+  animation: boardRowIn 0.34s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--i, 0) * 45ms);
+}
+
+@keyframes boardRowIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Safety net ----------
+   Motion.js already refuses to add .motion-on under reduced-motion, but if
+   the preference changes after load this keeps the page still. */
+@media (prefers-reduced-motion: reduce) {
+  .motion-on .phone-mockup-inner,
+  .motion-on .is-magnetic {
+    transform: none !important;
+    transition: none !important;
+  }
+  .motion-on .sponsor-tiles .sponsor-tile {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .motion-on .school-pin-inner,
+  .motion-on .school-pin::after,
+  .motion-on .board-panel:not([hidden]) .board-row {
+    animation: none !important;
+  }
+  .motion-on .school-pin::after { display: none; }
+}

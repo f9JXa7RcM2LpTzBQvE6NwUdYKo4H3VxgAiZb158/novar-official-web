@@ -15,6 +15,7 @@ import SponsorLearner from './modules/SponsorLearner.js?v=nav26';
 import SchoolsMap from './modules/SchoolsMap.js?v=nav31';
 import Leaderboards from './modules/Leaderboards.js?v=nav35';
 import Partners from './modules/Partners.js?v=nav36';
+import Motion from './modules/Motion.js?v=nav40';
 import Router from './modules/Router.js?v=nav22';
 import { initSmoothScroll } from './utils/smoothScroll.js?v=nav22';
 
@@ -59,7 +60,8 @@ class App {
         new SponsorLearner(),
         new SchoolsMap(),
         new Leaderboards(),
-        new Partners()
+        new Partners(),
+        new Motion()
       ];
 
       // Initialize utilities
