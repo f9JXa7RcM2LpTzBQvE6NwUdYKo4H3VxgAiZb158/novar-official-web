@@ -74,6 +74,36 @@ const AppConfig = {
     improvedPassRate: '10%'
   },
 
+  // Leaderboards. `sample: true` renders a visible "Sample data" badge —
+  // set it to false only once every list below holds real records.
+  // Rows are deliberately anonymous: these boards concern minors and named
+  // school staff, so no invented names ship here.
+  leaderboards: {
+    sample: true,
+    unit: 'pts',
+    learners: [
+      { rank: 1, name: 'Learner 1', detail: 'Alexandra Secondary School', score: 2480 },
+      { rank: 2, name: 'Learner 2', detail: 'Alexandra Secondary School', score: 2310 },
+      { rank: 3, name: 'Learner 3', detail: 'Alexandra Secondary School', score: 2150 },
+      { rank: 4, name: 'Learner 4', detail: 'Alexandra Secondary School', score: 1990 },
+      { rank: 5, name: 'Learner 5', detail: 'Alexandra Secondary School', score: 1870 }
+    ],
+    educators: [
+      { rank: 1, name: 'Educator 1', detail: 'Alexandra Secondary School', score: 1640 },
+      { rank: 2, name: 'Educator 2', detail: 'Alexandra Secondary School', score: 1520 },
+      { rank: 3, name: 'Educator 3', detail: 'Alexandra Secondary School', score: 1410 },
+      { rank: 4, name: 'Educator 4', detail: 'Alexandra Secondary School', score: 1280 },
+      { rank: 5, name: 'Educator 5', detail: 'Alexandra Secondary School', score: 1150 }
+    ],
+    schools: [
+      { rank: 1, name: 'Alexandra Secondary School', detail: 'Alexandra, Sandton', score: 8940 },
+      { rank: 2, name: 'School 2', detail: 'Open slot', score: null },
+      { rank: 3, name: 'School 3', detail: 'Open slot', score: null },
+      { rank: 4, name: 'School 4', detail: 'Open slot', score: null },
+      { rank: 5, name: 'School 5', detail: 'Open slot', score: null }
+    ]
+  },
+
   // Sponsorship (sponsor-a-learner)
   sponsorship: {
     pricePerLearnerPerMonth: 199.99,

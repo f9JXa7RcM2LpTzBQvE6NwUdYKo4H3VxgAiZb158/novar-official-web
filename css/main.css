@@ -1845,3 +1845,175 @@ section[id] {
   background: #fef3c7;
   border-radius: 0.25rem;
 }
+
+/* Map title */
+.impact-map-title {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.01em;
+}
+
+/* ---------- Leaderboards ---------- */
+
+.board {
+  margin-top: 2.5rem;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 1.25rem;
+  padding: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .board { padding: 1.5rem; }
+}
+
+.board-head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.board-title {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -0.01em;
+}
+
+/* Stays visible until every list holds real records. */
+.board-sample {
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #92400e;
+  background: #fef3c7;
+  border-radius: 0.25rem;
+  padding: 0.15rem 0.45rem;
+}
+
+.board-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.35rem;
+  padding: 0.28rem;
+  background: #f3f4f6;
+  border-radius: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.board-tab {
+  padding: 0.5rem 0.4rem;
+  border: none;
+  border-radius: 0.55rem;
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #6b7280;
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.board-tab:hover { color: #111827; }
+
+.board-tab.is-active {
+  background: #fff;
+  color: #0f766e;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.board-tab:focus-visible {
+  outline: 3px solid #2dd4bf;
+  outline-offset: 2px;
+}
+
+.board-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.board-row {
+  display: grid;
+  grid-template-columns: 1.75rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.7rem;
+  border-radius: 0.65rem;
+  background: #f9fafb;
+}
+
+.board-row.is-pending { opacity: 0.55; }
+
+/* Only the leader is emphasised — a full medal ramp turns a short list
+   into a podium and makes ranks 4 and 5 read as losers. */
+.board-row:first-child {
+  background: #f0fdfa;
+  box-shadow: inset 0 0 0 1px #99f6e4;
+}
+
+.board-rank {
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #9ca3af;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.board-row:first-child .board-rank { color: #0f766e; }
+
+.board-who { min-width: 0; }
+
+.board-name {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #111827;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.board-detail {
+  display: block;
+  font-size: 0.75rem;
+  color: #9ca3af;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.board-score {
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: #0f766e;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.board-score--pending { color: #9ca3af; }
+
+.board-unit {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: #9ca3af;
+  margin-left: 0.15rem;
+}
+
+.board-empty {
+  padding: 1.5rem;
+  text-align: center;
+  color: #9ca3af;
+  font-size: 0.875rem;
+}

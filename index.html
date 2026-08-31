@@ -16,7 +16,7 @@
     
     <!-- External Stylesheets -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/main.css?v=nav31">
+    <link rel="stylesheet" href="css/main.css?v=nav32">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -229,6 +229,8 @@
                     </div>
                 </div>
 
+                <h3 class="impact-map-title">Schools using NOVAR</h3>
+
                 <div class="impact-map-frame">
                     <div id="schools-map" class="impact-map" role="region"
                          aria-label="Map of schools where NOVAR is used"
@@ -239,6 +241,27 @@
                 </div>
 
                 <p class="impact-map-note">Pan and zoom the map, or select a pin to see the school.</p>
+
+                <!-- Leaderboards -->
+                <div class="board">
+                    <div class="board-head">
+                        <h3 class="board-title">Top performers</h3>
+                        <span class="board-sample" id="board-sample" hidden>Sample data</span>
+                    </div>
+
+                    <div class="board-tabs" role="tablist" aria-label="Leaderboards">
+                        <button type="button" class="board-tab" role="tab" id="tab-learners"
+                                aria-controls="panel-learners" aria-selected="true" data-board="learners">Learners</button>
+                        <button type="button" class="board-tab" role="tab" id="tab-educators"
+                                aria-controls="panel-educators" aria-selected="false" tabindex="-1" data-board="educators">Educators</button>
+                        <button type="button" class="board-tab" role="tab" id="tab-schools"
+                                aria-controls="panel-schools" aria-selected="false" tabindex="-1" data-board="schools">Schools</button>
+                    </div>
+
+                    <div class="board-panel" role="tabpanel" id="panel-learners" aria-labelledby="tab-learners" data-board="learners"></div>
+                    <div class="board-panel" role="tabpanel" id="panel-educators" aria-labelledby="tab-educators" data-board="educators" hidden></div>
+                    <div class="board-panel" role="tabpanel" id="panel-schools" aria-labelledby="tab-schools" data-board="schools" hidden></div>
+                </div>
             </div>
 
             <div class="max-w-2xl mx-auto">
@@ -560,8 +583,8 @@
 
     <!-- JavaScript Files -->
     <!-- Load configuration first -->
-    <script src="config/app.config.js?v=nav31"></script>
+    <script src="config/app.config.js?v=nav32"></script>
     <!-- Load main application -->
-    <script type="module" src="js/main.js?v=nav31"></script>
+    <script type="module" src="js/main.js?v=nav32"></script>
 </body>
 </html>

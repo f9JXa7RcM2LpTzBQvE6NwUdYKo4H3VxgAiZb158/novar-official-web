@@ -1,0 +1,13 @@
+import { openPage } from './check.mjs';
+import { writeFileSync } from 'node:fs';
+const [out, tab = 'learners', w = '1100', h = '1050'] = process.argv.slice(2);
+const p = await openPage('http://localhost:8765/index.html', { width: Number(w), height: Number(h) });
+await p.evaluate(`document.querySelector('.impact-map-title').scrollIntoView({block:'start'})`);
+await new Promise((r) => setTimeout(r, 4500));
+await p.evaluate(`window.scrollBy(0, 90)`);
+if (tab !== 'learners') await p.evaluate(`document.getElementById('tab-${tab}').click()`);
+await new Promise((r) => setTimeout(r, 900));
+const shot = await p.send('Page.captureScreenshot', { format: 'png' });
+writeFileSync(out, Buffer.from(shot.data, 'base64'));
+console.log('saved', out);
+process.exit(0);
