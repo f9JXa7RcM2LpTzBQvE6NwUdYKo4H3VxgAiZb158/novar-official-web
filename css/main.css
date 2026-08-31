@@ -1995,6 +1995,9 @@ section[id] {
 
 .board-row.is-pending { opacity: 0.55; }
 
+/* With scores hidden the row is just rank + name, so drop the third column. */
+.board-row--noscore { grid-template-columns: 1.75rem minmax(0, 1fr); }
+
 /* Only the leader is emphasised — a full medal ramp turns a short list
    into a podium and makes ranks 4 and 5 read as losers. */
 .board-row:first-child {

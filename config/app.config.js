@@ -80,6 +80,9 @@ const AppConfig = {
   // school staff, so no invented names ship here.
   leaderboards: {
     sample: true,
+    // Scores stay in the data below but are not displayed. Flip to true
+    // once the numbers are real and their unit is decided.
+    showScores: false,
     units: { learners: '', educators: '', schools: 'pts' },
     learners: [
       { rank: 1, name: 'Learner 1', detail: 'Alexandra Secondary School', score: 2480 },

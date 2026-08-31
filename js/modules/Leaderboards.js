@@ -20,6 +20,7 @@ class Leaderboards {
     const config = window.AppConfig || {};
     this.data = config.leaderboards || {};
     this.units = this.data.units || {};
+    this.showScores = this.data.showScores === true;
 
     this.tabs = Array.from(this.root.querySelectorAll('.board-tab'));
     this.panels = Array.from(this.root.querySelectorAll('.board-panel'));
@@ -87,11 +88,13 @@ class Leaderboards {
   row(entry, unit) {
     const pending = entry.score === null || entry.score === undefined;
     const suffix = unit ? `<span class="board-unit">${unit}</span>` : '';
-    const score = pending
-      ? '<span class="board-score board-score--pending">—</span>'
-      : `<span class="board-score">${Number(entry.score).toLocaleString(LOCALE)}${suffix}</span>`;
+    const score = !this.showScores
+      ? ''
+      : pending
+        ? '<span class="board-score board-score--pending">—</span>'
+        : `<span class="board-score">${Number(entry.score).toLocaleString(LOCALE)}${suffix}</span>`;
 
-    return `<li class="board-row${pending ? ' is-pending' : ''}">
+    return `<li class="board-row${!this.showScores ? ' board-row--noscore' : ''}${pending && this.showScores ? ' is-pending' : ''}">
         <span class="board-rank">${entry.rank}</span>
         <span class="board-who">
           <span class="board-name">${entry.name}</span>

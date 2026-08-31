@@ -8,9 +8,10 @@ console.log('sample badge   :', await ev(`(function(){var b=document.getElementB
 
 const rowsOf = (b) => ev(`
   JSON.stringify([...document.querySelectorAll('.board-panel[data-board="${b}"] .board-row')].map(function (r) {
+    var sc = r.querySelector('.board-score');
     return r.querySelector('.board-rank').textContent + ' ' +
-           r.querySelector('.board-name').textContent + ' — ' +
-           r.querySelector('.board-score').textContent;
+           r.querySelector('.board-name').textContent +
+           (sc ? ' — ' + sc.textContent : '');
   }))
 `);
 
