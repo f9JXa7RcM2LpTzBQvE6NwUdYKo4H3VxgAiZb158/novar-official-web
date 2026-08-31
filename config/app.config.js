@@ -80,7 +80,7 @@ const AppConfig = {
   // school staff, so no invented names ship here.
   leaderboards: {
     sample: true,
-    unit: 'pts',
+    units: { learners: '', educators: '', schools: 'pts' },
     learners: [
       { rank: 1, name: 'Learner 1', detail: 'Alexandra Secondary School', score: 2480 },
       { rank: 2, name: 'Learner 2', detail: 'Alexandra Secondary School', score: 2310 },
@@ -96,11 +96,7 @@ const AppConfig = {
       { rank: 5, name: 'Educator 5', detail: 'Alexandra Secondary School', score: 1150 }
     ],
     schools: [
-      { rank: 1, name: 'Alexandra Secondary School', detail: 'Alexandra, Sandton', score: 8940 },
-      { rank: 2, name: 'School 2', detail: 'Open slot', score: null },
-      { rank: 3, name: 'School 3', detail: 'Open slot', score: null },
-      { rank: 4, name: 'School 4', detail: 'Open slot', score: null },
-      { rank: 5, name: 'School 5', detail: 'Open slot', score: null }
+      { rank: 1, name: 'Alexandra Secondary School', detail: 'Alexandra, Sandton', score: 8940 }
     ]
   },
 

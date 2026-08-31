@@ -19,7 +19,7 @@ class Leaderboards {
 
     const config = window.AppConfig || {};
     this.data = config.leaderboards || {};
-    this.unit = this.data.unit || '';
+    this.units = this.data.units || {};
 
     this.tabs = Array.from(this.root.querySelectorAll('.board-tab'));
     this.panels = Array.from(this.root.querySelectorAll('.board-panel'));
@@ -80,14 +80,16 @@ class Leaderboards {
       return;
     }
 
-    panel.innerHTML = `<ol class="board-list">${rows.map((r) => this.row(r)).join('')}</ol>`;
+    const unit = this.units[board] || '';
+    panel.innerHTML = `<ol class="board-list">${rows.map((r) => this.row(r, unit)).join('')}</ol>`;
   }
 
-  row(entry) {
+  row(entry, unit) {
     const pending = entry.score === null || entry.score === undefined;
+    const suffix = unit ? `<span class="board-unit">${unit}</span>` : '';
     const score = pending
       ? '<span class="board-score board-score--pending">—</span>'
-      : `<span class="board-score">${Number(entry.score).toLocaleString(LOCALE)}<span class="board-unit">${this.unit}</span></span>`;
+      : `<span class="board-score">${Number(entry.score).toLocaleString(LOCALE)}${suffix}</span>`;
 
     return `<li class="board-row${pending ? ' is-pending' : ''}">
         <span class="board-rank">${entry.rank}</span>
