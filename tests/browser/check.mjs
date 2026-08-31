@@ -18,7 +18,8 @@ export async function openPage(url, { width = 1440, height = 900 } = {}) {
   await send('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: 1, mobile: false });
   await send('Page.navigate', { url });
   await new Promise((r) => setTimeout(r, 3500));
-  const evaluate = async (expr) =>
-    (await send('Runtime.evaluate', { expression: expr, returnByValue: true })).result?.value;
+  const evaluate = async (expr, { awaitPromise = false } = {}) =>
+    (await send('Runtime.evaluate', { expression: expr, returnByValue: true, awaitPromise }))
+      .result?.value;
   return { evaluate, errors, send };
 }

@@ -1630,3 +1630,46 @@ section[id] {
   outline: 3px solid #2dd4bf;
   outline-offset: 2px;
 }
+
+/* Partner strip — a quiet credit under the sponsorship offer. The section
+   already carries a strong dark panel, so this stays hairline and muted
+   rather than competing with it. */
+.sponsor-partner {
+  max-width: 64rem;
+  margin: 2.5rem auto 0;
+  padding-top: 2rem;
+  border-top: 1px solid #e5e7eb;
+  text-align: center;
+}
+
+.sponsor-partner-label {
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #9ca3af;
+  margin-bottom: 1rem;
+}
+
+.sponsor-partner-mark {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.sponsor-partner-logo {
+  height: 2.25rem;
+  width: auto;
+  object-fit: contain;
+}
+
+.sponsor-partner-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #6b7280;
+  letter-spacing: 0.01em;
+}
+
+@media (min-width: 768px) {
+  .sponsor-partner-logo { height: 2.75rem; }
+}
