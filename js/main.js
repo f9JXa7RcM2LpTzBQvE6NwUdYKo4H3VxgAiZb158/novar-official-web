@@ -14,6 +14,7 @@ import HeroPhoneTour from './modules/HeroPhoneTour.js?v=nav22';
 import SponsorLearner from './modules/SponsorLearner.js?v=nav26';
 import SchoolsMap from './modules/SchoolsMap.js?v=nav31';
 import Leaderboards from './modules/Leaderboards.js?v=nav35';
+import Partners from './modules/Partners.js?v=nav36';
 import Router from './modules/Router.js?v=nav22';
 import { initSmoothScroll } from './utils/smoothScroll.js?v=nav22';
 
@@ -57,7 +58,8 @@ class App {
         new ContactForm(),
         new SponsorLearner(),
         new SchoolsMap(),
-        new Leaderboards()
+        new Leaderboards(),
+        new Partners()
       ];
 
       // Initialize utilities

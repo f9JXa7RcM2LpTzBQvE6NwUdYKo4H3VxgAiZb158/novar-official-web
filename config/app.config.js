@@ -74,6 +74,17 @@ const AppConfig = {
     improvedPassRate: '10%'
   },
 
+  // Partner brands. Add an entry to render another card; the grid reflows
+  // on its own. `line` and `url` are optional.
+  partners: [
+    {
+      name: 'Liberty Group SA',
+      logo: 'assets/liberty-logo.png?v=1',
+      line: 'Backing NOVAR through the #DriveHope initiative — a R1 million commitment to keep learners learning.',
+      url: ''
+    }
+  ],
+
   // Leaderboards. `sample: true` renders a visible "Sample data" badge —
   // set it to false only once every list below holds real records.
   // Rows are deliberately anonymous: these boards concern minors and named
