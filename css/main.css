@@ -230,14 +230,16 @@ body {
 }
 
 .nav-pill-links--desktop {
-  /* Chips carry their own padding, so the gap between them is small; the
-     leading inset is what separates the group from the NOVAR mark. */
+  /* Chips carry their own padding, so the gap between them is small. The
+     group is pushed to the end of its track so the tabs always sit right
+     beside the actions — centring them left a growing dead gap before
+     Contact on wide screens. The slack collects after the NOVAR mark. */
   gap: clamp(0.1rem, 0.5vw, 0.4rem);
   flex: 1 1 auto;
-  justify-content: center;
+  justify-content: flex-end;
   min-width: 0;
   padding-inline-start: clamp(0.75rem, 3vw, 2.5rem);
-  padding-inline-end: clamp(0.5rem, 1.5vw, 1.25rem);
+  padding-inline-end: clamp(0.4rem, 0.9vw, 0.75rem);
 }
 
 .nav-pill-actions--desktop {

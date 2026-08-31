@@ -13,7 +13,15 @@ for (const w of [768, 900, 1024, 1280, 1440]) {
       return Math.round(first.x - brand.right);
     })()
   `);
+  const tabsToContact = await ev(`
+    (function(){
+      var links=document.querySelectorAll('.nav-pill-links--desktop .nav-pill-link');
+      var last=links[links.length-1].getBoundingClientRect();
+      var contact=document.querySelector('.nav-pill-btn-ghost').getBoundingClientRect();
+      return Math.round(contact.x - last.right);
+    })()
+  `);
   const overflow = await ev(`document.querySelector('.nav-pill-top').scrollWidth > document.querySelector('.nav-pill-top').clientWidth`);
-  console.log(`${String(w).padStart(4)}px | contact ${await box('.nav-pill-btn-ghost')} | getapp ${await box('.nav-pill-btn-primary')} | logo→tabs gap ${String(gap).padStart(3)}px | row overflow: ${overflow}`);
+  console.log(`${String(w).padStart(4)}px | logo→tabs ${String(gap).padStart(3)}px | tabs→Contact ${String(tabsToContact).padStart(3)}px | overflow: ${overflow}`);
 }
 process.exit(0);
