@@ -1,0 +1,10 @@
+import { openPage } from './check.mjs';
+import { writeFileSync } from 'node:fs';
+const [url, out, w = 1400, h = 1150] = process.argv.slice(2);
+const p = await openPage(url, { width: Number(w), height: Number(h) });
+await p.evaluate(`document.getElementById('sponsor').scrollIntoView({block:'start'})`);
+await new Promise((r) => setTimeout(r, 1500));
+const shot = await p.send('Page.captureScreenshot', { format: 'png' });
+writeFileSync(out, Buffer.from(shot.data, 'base64'));
+console.log('saved', out);
+process.exit(0);

@@ -1,7 +1,14 @@
 /**
  * Sponsor a Learner
- * Quantity-based sponsorship: R10.81 per learner per month, charged upfront
- * for the months remaining until December.
+ *
+ * Two independent contributions share one card and one pair of contact
+ * fields:
+ *   - Sponsorship — N learners at R199.99 per learner per month, charged
+ *     upfront for the months remaining until December.
+ *   - Donation — any amount, its own field and its own button.
+ *
+ * The total box always reflects the sponsorship; the donation is whatever
+ * the giver types.
  */
 
 import {
@@ -14,6 +21,7 @@ import {
 import { isKeyConfigured, openCheckout } from '../utils/paystack.js';
 
 const LOCALE = 'en-ZA';
+const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 class SponsorLearner {
   constructor() {
@@ -35,11 +43,11 @@ class SponsorLearner {
     this.breakdownEl = document.getElementById('sponsor-breakdown');
     this.nameInput = document.getElementById('sponsor-name');
     this.emailInput = document.getElementById('sponsor-email');
-    this.button = document.getElementById('sponsor-button');
+    this.sponsorButton = document.getElementById('sponsor-button');
+    this.donateButton = document.getElementById('sponsor-donate-button');
 
     this.months = monthsUntilDecember(new Date());
     this.learnerCount = 1;
-    this.mode = 'sponsor';   // 'sponsor' = N learners, 'amount' = free-form gift
 
     this.init();
   }
@@ -57,25 +65,17 @@ class SponsorLearner {
       if (isValidLearnerCount(raw)) this.setCount(parseInt(raw, 10), { fromPreset: false });
     });
 
-    this.amountInput?.addEventListener('input', () => {
-      const raw = this.amountInput.value;
-      if (raw === '' || Number(raw) <= 0) {
-        this.mode = 'sponsor';
-        this.setCount(this.learnerCount, { fromPreset: true });
-        return;
-      }
-      this.mode = 'amount';
-      if (this.customInput) this.customInput.value = '';
-      this.quantities?.querySelectorAll('button[data-learners]')
-        .forEach((btn) => btn.classList.remove('active'));
-      this.renderTotal();
-    });
-
-    this.button?.addEventListener('click', (e) => {
+    this.sponsorButton?.addEventListener('click', (e) => {
       e.preventDefault();
       this.handleSponsor();
     });
 
+    this.donateButton?.addEventListener('click', (e) => {
+      e.preventDefault();
+      this.handleDonate();
+    });
+
+    // Enter inside the form submits the sponsorship, the primary action
     this.form.addEventListener('submit', (e) => {
       e.preventDefault();
       this.handleSponsor();
@@ -91,8 +91,6 @@ class SponsorLearner {
    */
   setCount(count, { fromPreset }) {
     this.learnerCount = count;
-    this.mode = 'sponsor';
-    if (this.amountInput) this.amountInput.value = '';
 
     this.quantities?.querySelectorAll('button[data-learners]').forEach((btn) => {
       const matches = fromPreset && parseInt(btn.getAttribute('data-learners'), 10) === count;
@@ -104,29 +102,15 @@ class SponsorLearner {
     this.renderTotal();
   }
 
-  /** @returns {number} the amount to charge, in rands, for the active mode */
-  currentTotal() {
-    if (this.mode === 'amount') return Number(this.amountInput?.value) || 0;
-    return calculateTotal(this.learnerCount, new Date(), this.pricePerMonth);
-  }
-
   renderTotal() {
-    const total = this.currentTotal();
+    const total = calculateTotal(this.learnerCount, new Date(), this.pricePerMonth);
     if (this.totalEl) this.totalEl.textContent = `R${total.toFixed(2)}`;
 
     if (this.breakdownEl) {
-      if (this.mode === 'amount') {
-        this.breakdownEl.textContent = 'One-off gift to NOVAR';
-      } else {
-        const learnerWord = this.learnerCount === 1 ? 'learner' : 'learners';
-        const monthWord = this.months === 1 ? 'month' : 'months';
-        this.breakdownEl.textContent =
-          `${this.learnerCount} ${learnerWord} × ${this.months} ${monthWord} to December`;
-      }
-    }
-
-    if (this.button) {
-      this.button.textContent = this.mode === 'amount' ? 'Give →' : 'Sponsor a learner →';
+      const learnerWord = this.learnerCount === 1 ? 'learner' : 'learners';
+      const monthWord = this.months === 1 ? 'month' : 'months';
+      this.breakdownEl.textContent =
+        `${this.learnerCount} ${learnerWord} × ${this.months} ${monthWord} to December`;
     }
   }
 
@@ -170,17 +154,8 @@ class SponsorLearner {
     }).join('');
   }
 
-  validate() {
-    if (this.mode === 'amount') {
-      if (!(Number(this.amountInput?.value) > 0)) {
-        alert('Please enter an amount to give.');
-        this.amountInput?.focus();
-        return false;
-      }
-    } else if (!isValidLearnerCount(this.learnerCount)) {
-      alert('Please choose how many learners you would like to sponsor.');
-      return false;
-    }
+  /** Name and email are required by both flows. */
+  validateContact() {
     const name = this.nameInput?.value;
     if (!name || name.trim().length < 2) {
       alert('Please enter your name or company.');
@@ -188,7 +163,7 @@ class SponsorLearner {
       return false;
     }
     const email = this.emailInput?.value;
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    if (!email || !EMAIL.test(email)) {
       alert('Please enter a valid email address.');
       this.emailInput?.focus();
       return false;
@@ -197,41 +172,71 @@ class SponsorLearner {
   }
 
   handleSponsor() {
-    if (!this.validate()) return;
+    if (!isValidLearnerCount(this.learnerCount)) {
+      alert('Please choose how many learners you would like to sponsor.');
+      return;
+    }
+    if (!this.validateContact()) return;
 
+    const total = calculateTotal(this.learnerCount, new Date(), this.pricePerMonth);
+    this.checkout({
+      amount: toCents(total),
+      prefix: 'NOVAR_SPONSOR',
+      fields: [
+        { display_name: 'Type', variable_name: 'contribution_type', value: 'sponsorship' },
+        { display_name: 'Learners Sponsored', variable_name: 'learners_sponsored', value: String(this.learnerCount) },
+        { display_name: 'Months Covered', variable_name: 'months_covered', value: `${this.months} (to December)` }
+      ],
+      thanks: `Thank you! You have sponsored ${this.learnerCount} learner(s) until December.`
+    });
+  }
+
+  handleDonate() {
+    const amount = Number(this.amountInput?.value);
+    if (!(amount > 0)) {
+      alert('Please enter an amount to donate.');
+      this.amountInput?.focus();
+      return;
+    }
+    if (!this.validateContact()) return;
+
+    this.checkout({
+      amount: toCents(amount),
+      prefix: 'NOVAR_DONATION',
+      fields: [
+        { display_name: 'Type', variable_name: 'contribution_type', value: 'donation' }
+      ],
+      thanks: 'Thank you for supporting NOVAR.'
+    });
+  }
+
+  /**
+   * @param {{amount: number, prefix: string, fields: object[], thanks: string}} options
+   */
+  checkout({ amount, prefix, fields, thanks }) {
     if (!isKeyConfigured(this.paystackPublicKey)) {
       alert('Payments are not configured. Please contact the administrator.');
       return;
     }
 
-    const total = this.currentTotal();
-    const amount = toCents(total);
-    const isGift = this.mode === 'amount';
-
     openCheckout({
       key: this.paystackPublicKey,
       email: this.emailInput.value,
       amount,
-      reference: `${isGift ? 'NOVAR_GIFT' : 'NOVAR_SPONSOR'}_${Date.now()}`,
+      reference: `${prefix}_${Date.now()}`,
       metadata: {
         custom_fields: [
           { display_name: 'Name', variable_name: 'sponsor_name', value: this.nameInput.value },
-          { display_name: 'Type', variable_name: 'contribution_type', value: isGift ? 'donation' : 'sponsorship' },
-          ...(isGift ? [] : [
-            { display_name: 'Learners Sponsored', variable_name: 'learners_sponsored', value: String(this.learnerCount) },
-            { display_name: 'Months Covered', variable_name: 'months_covered', value: `${this.months} (to December)` }
-          ])
+          ...fields
         ]
       },
       onSuccess: () => {
-        alert(isGift
-          ? 'Thank you for supporting NOVAR.'
-          : `Thank you! You have sponsored ${this.learnerCount} learner(s) until December.`);
+        alert(thanks);
         this.reset();
       },
-      onClose: () => console.log('Sponsorship checkout closed')
+      onClose: () => console.log('Checkout closed')
     }).catch((error) => {
-      console.error('Sponsorship payment error:', error);
+      console.error('Payment error:', error);
       alert('An error occurred while starting your payment. Please try again.');
     });
   }
@@ -240,7 +245,6 @@ class SponsorLearner {
     if (this.nameInput) this.nameInput.value = '';
     if (this.emailInput) this.emailInput.value = '';
     if (this.amountInput) this.amountInput.value = '';
-    this.mode = 'sponsor';
     this.setCount(1, { fromPreset: true });
   }
 }

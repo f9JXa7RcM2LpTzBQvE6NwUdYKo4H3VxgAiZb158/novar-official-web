@@ -1611,3 +1611,22 @@ section[id] {
     animation: none;
   }
 }
+
+/* Secondary contribution: quieter than the sponsorship CTA above it,
+   so the two buttons read as primary and alternative, not as a pair. */
+.sponsor-donate {
+  background: #fff;
+  color: #0f766e;
+  border: 2px solid #0f766e;
+  transition: background 0.18s ease, transform 0.18s ease;
+}
+
+.sponsor-donate:hover {
+  background: #f0fdfa;
+  transform: translateY(-2px);
+}
+
+.sponsor-donate:focus-visible {
+  outline: 3px solid #2dd4bf;
+  outline-offset: 2px;
+}

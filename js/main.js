@@ -11,7 +11,7 @@ import ComingSoonModal from './modules/ComingSoonModal.js?v=nav22';
 import ContactForm from './modules/ContactForm.js?v=nav22';
 import HeroTypewriter from './modules/HeroTypewriter.js?v=nav22';
 import HeroPhoneTour from './modules/HeroPhoneTour.js?v=nav22';
-import SponsorLearner from './modules/SponsorLearner.js?v=nav25';
+import SponsorLearner from './modules/SponsorLearner.js?v=nav26';
 import Router from './modules/Router.js?v=nav22';
 import { initSmoothScroll } from './utils/smoothScroll.js?v=nav22';
 
