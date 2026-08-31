@@ -16,7 +16,7 @@
     
     <!-- External Stylesheets -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/main.css?v=nav29">
+    <link rel="stylesheet" href="css/main.css?v=nav31">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -212,6 +212,35 @@
                 </p>
             </div>
             
+            <!-- Where NOVAR is -->
+            <div class="impact-block animate-on-scroll">
+                <div class="impact-stats">
+                    <div class="impact-stat">
+                        <span class="impact-stat-value" id="stat-schools">1</span>
+                        <span class="impact-stat-label">Schools</span>
+                    </div>
+                    <div class="impact-stat">
+                        <span class="impact-stat-value" id="stat-learners">150k+</span>
+                        <span class="impact-stat-label">Learners reached</span>
+                    </div>
+                    <div class="impact-stat">
+                        <span class="impact-stat-value" id="stat-passrate">10%</span>
+                        <span class="impact-stat-label">Improved pass rate</span>
+                    </div>
+                </div>
+
+                <div class="impact-map-frame">
+                    <div id="schools-map" class="impact-map" role="region"
+                         aria-label="Map of schools where NOVAR is used"
+                         tabindex="0"></div>
+                    <noscript>
+                        <p class="impact-map-fallback">NOVAR is used at Alexandra Secondary School in Alexandra, Sandton, Johannesburg.</p>
+                    </noscript>
+                </div>
+
+                <p class="impact-map-note">Pan and zoom the map, or select a pin to see the school.</p>
+            </div>
+
             <div class="max-w-2xl mx-auto">
                 <!-- Forbes feature -->
                 <div class="animate-on-scroll">
@@ -531,8 +560,8 @@
 
     <!-- JavaScript Files -->
     <!-- Load configuration first -->
-    <script src="config/app.config.js?v=nav25"></script>
+    <script src="config/app.config.js?v=nav31"></script>
     <!-- Load main application -->
-    <script type="module" src="js/main.js?v=nav27"></script>
+    <script type="module" src="js/main.js?v=nav31"></script>
 </body>
 </html>

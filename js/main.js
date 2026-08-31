@@ -12,6 +12,7 @@ import ContactForm from './modules/ContactForm.js?v=nav22';
 import HeroTypewriter from './modules/HeroTypewriter.js?v=nav22';
 import HeroPhoneTour from './modules/HeroPhoneTour.js?v=nav22';
 import SponsorLearner from './modules/SponsorLearner.js?v=nav26';
+import SchoolsMap from './modules/SchoolsMap.js?v=nav31';
 import Router from './modules/Router.js?v=nav22';
 import { initSmoothScroll } from './utils/smoothScroll.js?v=nav22';
 
@@ -53,7 +54,8 @@ class App {
         new BackToTop(),
         new ComingSoonModal(),
         new ContactForm(),
-        new SponsorLearner()
+        new SponsorLearner(),
+        new SchoolsMap()
       ];
 
       // Initialize utilities

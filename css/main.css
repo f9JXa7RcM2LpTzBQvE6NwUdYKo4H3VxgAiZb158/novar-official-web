@@ -1673,3 +1673,175 @@ section[id] {
 @media (min-width: 768px) {
   .sponsor-partner-logo { height: 2.75rem; }
 }
+
+/* ---------- Impact stats + schools map ---------- */
+
+.impact-block {
+  max-width: 64rem;
+  margin: 0 auto 3rem;
+}
+
+.impact-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.impact-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 1.1rem 0.75rem;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 1rem;
+  text-align: center;
+}
+
+.impact-stat-value {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.05;
+  color: #0f766e;
+  font-variant-numeric: tabular-nums;
+}
+
+.impact-stat-label {
+  font-size: 0.75rem;
+  color: #6b7280;
+  letter-spacing: 0.01em;
+}
+
+@media (min-width: 768px) {
+  .impact-stat-value { font-size: 2.25rem; }
+  .impact-stat-label { font-size: 0.8125rem; }
+}
+
+.impact-map-frame {
+  position: relative;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  background: #f3f4f6;
+}
+
+.impact-map {
+  height: 320px;
+  width: 100%;
+}
+
+/* OSM's default tiles are saturated; desaturating them lets the teal pins
+   carry the colour. Tiles only — controls and pins keep full colour. */
+.impact-map .leaflet-tile-pane {
+  filter: saturate(0.45) contrast(0.95) brightness(1.03);
+}
+
+@media (min-width: 768px) {
+  .impact-map { height: 420px; }
+}
+
+.impact-map:focus-visible {
+  outline: 3px solid #2dd4bf;
+  outline-offset: -3px;
+}
+
+.impact-map-fallback {
+  padding: 2rem 1.5rem;
+  text-align: center;
+  color: #4b5563;
+  font-size: 0.9375rem;
+}
+
+.impact-map-note {
+  margin-top: 0.75rem;
+  font-size: 0.75rem;
+  color: #9ca3af;
+  text-align: center;
+}
+
+/* --- map pins --- */
+
+/* Leaflet styles .leaflet-div-icon and .leaflet-marker-pane img directly, so
+   these rules are scoped deeply enough to outrank it. */
+.leaflet-container .school-pin {
+  background: none;
+  border: none;
+}
+
+.leaflet-container .school-pin-inner {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  padding: 0.3rem;
+  background: #fff;
+  border: 2px solid #0f766e;
+  border-radius: 50% 50% 50% 6px;   /* teardrop, anchored bottom-left */
+  transform: rotate(-45deg);
+  box-shadow: 0 6px 16px rgba(15, 118, 110, 0.28);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.school-pin:hover .school-pin-inner,
+.school-pin:focus-visible .school-pin-inner {
+  transform: rotate(-45deg) scale(1.08);
+  box-shadow: 0 10px 22px rgba(15, 118, 110, 0.38);
+}
+
+/* Beats Leaflet's `.leaflet-container .leaflet-marker-pane img { width: auto }` */
+.leaflet-container .leaflet-marker-pane .school-pin-logo {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  transform: rotate(45deg);   /* counter the pin's rotation */
+}
+
+.school-pin-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #0f766e;
+  transform: rotate(45deg);
+}
+
+/* --- popups --- */
+
+.leaflet-popup-content-wrapper {
+  border-radius: 0.75rem;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.16);
+}
+
+.leaflet-popup-content {
+  margin: 0.85rem 1rem;
+  font-family: var(--font-body);
+}
+
+.school-popup-name {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  color: #111827;
+}
+
+.school-popup-area {
+  display: block;
+  font-size: 0.8125rem;
+  color: #6b7280;
+  margin-top: 0.15rem;
+}
+
+.school-popup-note {
+  display: inline-block;
+  margin-top: 0.45rem;
+  padding: 0.1rem 0.45rem;
+  font-size: 0.6875rem;
+  color: #92400e;
+  background: #fef3c7;
+  border-radius: 0.25rem;
+}

@@ -46,6 +46,34 @@ const AppConfig = {
     publicKey: 'pk_live_8ef4b153100191894aaa7e9ab4e9aca0c1ae7cd3'
   },
 
+  // Schools using NOVAR — add an entry here to drop a new pin on the map.
+  // `confirmed: false` means the coordinates are approximate and the pin
+  // renders with a "location approximate" note in its popup.
+  schools: [
+    {
+      name: 'Alexandra Secondary School',
+      area: 'Alexandra, Sandton, Johannesburg',
+      lat: -26.104444,
+      lng: 28.098889,
+      logo: 'assets/favicon-192.png',
+      confirmed: false
+    }
+  ],
+
+  map: {
+    center: [-26.104444, 28.098889],
+    zoom: 12,
+    minZoom: 4,
+    maxZoom: 17
+  },
+
+  // Impact figures shown above the map. The school count is derived from
+  // `schools` above, so it never drifts out of step with the pins.
+  impact: {
+    learnersReached: '150k+',
+    improvedPassRate: '10%'
+  },
+
   // Sponsorship (sponsor-a-learner)
   sponsorship: {
     pricePerLearnerPerMonth: 199.99,
