@@ -98,6 +98,17 @@ class SponsorLearner {
   }
 
   renderProgress() {
+    const panel = document.querySelector('.sponsor-progress');
+
+    // A stale cached config leaves `sponsorship` undefined, which would render
+    // a meaningless "0 of 0" panel with no tiles. Hide it rather than lie.
+    if (!this.goal) {
+      if (panel) panel.hidden = true;
+      console.warn('Sponsorship config missing — progress panel hidden.');
+      return;
+    }
+    if (panel) panel.hidden = false;
+
     const countEl = document.getElementById('sponsor-progress-count');
     const goalEl = document.getElementById('sponsor-progress-goal');
     const barEl = document.getElementById('sponsor-progress-bar');

@@ -49,7 +49,7 @@ const AppConfig = {
   // Sponsorship (sponsor-a-learner)
   sponsorship: {
     pricePerLearnerPerMonth: 10.81,
-    goal: 15400,
+    goal: 15403,
     learnersSponsored: 0,   // update by hand as sponsorships come in
     learnersPerTile: 100,
     presets: [1, 2, 5, 10]
