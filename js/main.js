@@ -9,9 +9,13 @@ import ScrollAnimations from './modules/ScrollAnimations.js?v=nav22';
 import BackToTop from './modules/BackToTop.js?v=nav22';
 import ComingSoonModal from './modules/ComingSoonModal.js?v=nav22';
 import ContactForm from './modules/ContactForm.js?v=nav22';
-import Donation from './modules/Donation.js?v=nav22';
 import HeroTypewriter from './modules/HeroTypewriter.js?v=nav22';
 import HeroPhoneTour from './modules/HeroPhoneTour.js?v=nav22';
+import SponsorLearner from './modules/SponsorLearner.js?v=nav26';
+import SchoolsMap from './modules/SchoolsMap.js?v=nav31';
+import Leaderboards from './modules/Leaderboards.js?v=nav42';
+import Partners from './modules/Partners.js?v=nav43';
+import Motion from './modules/Motion.js?v=nav40';
 import Router from './modules/Router.js?v=nav22';
 import { initSmoothScroll } from './utils/smoothScroll.js?v=nav22';
 
@@ -53,7 +57,11 @@ class App {
         new BackToTop(),
         new ComingSoonModal(),
         new ContactForm(),
-        new Donation()
+        new SponsorLearner(),
+        new SchoolsMap(),
+        new Leaderboards(),
+        new Partners(),
+        new Motion()
       ];
 
       // Initialize utilities
@@ -75,7 +83,7 @@ class App {
   initRoutes() {
     // Define routes that require specific actions
     // Most sections use smooth scroll, but we can add specific logic here
-    const sections = ['download', 'purpose', 'features', 'donate', 'contact'];
+    const sections = ['download', 'purpose', 'features', 'sponsor', 'contact'];
     
     sections.forEach(route => {
       Router.addRoute(route, (r) => {

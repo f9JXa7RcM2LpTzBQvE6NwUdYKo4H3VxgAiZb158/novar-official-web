@@ -1010,7 +1010,7 @@ git commit -m "Add SponsorLearner module wiring quantity, pricing and checkout"
 
 - [ ] **Step 1: Run the unit tests**
 
-Run: `node --test tests/`
+Run: `node --test` (bare — Node 25 resolves `node --test tests/` as a module path and errors)
 Expected: all pass, 0 failures
 
 - [ ] **Step 2: Verify nav, reveals and the JS guard still work**
