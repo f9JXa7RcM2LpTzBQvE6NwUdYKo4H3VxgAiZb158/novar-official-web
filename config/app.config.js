@@ -102,7 +102,7 @@ const AppConfig = {
   // Rows are deliberately anonymous: these boards concern minors and named
   // school staff, so no invented names ship here.
   leaderboards: {
-    sample: true,
+    sample: false,
     // Scores stay in the data below but are not displayed. Flip to true
     // once the numbers are real and their unit is decided.
     showScores: false,
