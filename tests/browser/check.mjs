@@ -17,7 +17,17 @@ export async function openPage(url, { width = 1440, height = 900 } = {}) {
   await send('Network.setCacheDisabled', { cacheDisabled: true });
   await send('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: 1, mobile: false });
   await send('Page.navigate', { url });
-  await new Promise((r) => setTimeout(r, 3500));
+  // The page loads Tailwind, Font Awesome and Google Fonts render-blocking
+  // from CDNs. On a slow link that can take well over 10s, so wait for the
+  // document rather than a fixed guess.
+  for (let i = 0; i < 20; i++) {
+    const state = (await send('Runtime.evaluate',
+        {expression: 'document.readyState', returnByValue: true}))
+        .result?.value;
+    if (state === 'complete') break;
+    await new Promise((r) => setTimeout(r, 1000));
+  }
+  await new Promise((r) => setTimeout(r, 1200));
   const evaluate = async (expr, { awaitPromise = false } = {}) =>
     (await send('Runtime.evaluate', { expression: expr, returnByValue: true, awaitPromise }))
       .result?.value;

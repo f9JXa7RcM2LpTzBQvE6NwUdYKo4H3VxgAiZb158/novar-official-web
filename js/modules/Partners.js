@@ -33,14 +33,11 @@ class Partners {
   }
 
   card(partner) {
-    const line = partner.line ? `<p class="partner-line">${partner.line}</p>` : '';
+    // Logo only. `name` still rides along as alt text, so the brand is
+    // announced to screen readers and survives a failed image load.
     const inner = `
       <div class="partner-logo-plate">
         <img src="${partner.logo}" alt="${partner.name}" class="partner-logo" loading="lazy">
-      </div>
-      <div class="partner-copy">
-        <p class="partner-name">${partner.name}</p>
-        ${line}
       </div>`;
 
     return partner.url

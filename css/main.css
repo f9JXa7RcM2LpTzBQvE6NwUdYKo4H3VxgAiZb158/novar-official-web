@@ -1696,7 +1696,7 @@ section[id] {
   flex-direction: column;
   align-items: center;
   gap: 1.1rem;
-  padding: 1.75rem 1.5rem;
+  padding: 1.5rem;
   background: linear-gradient(180deg, #ffffff 0%, #f0fdfa 100%);
   border: 1px solid #99f6e4;
   border-radius: 1.25rem;
@@ -1704,15 +1704,11 @@ section[id] {
   text-align: center;
 }
 
-/* A lone partner gets the wider logo-beside-copy treatment; two or more sit
-   as equal columns, where a stacked card reads better. */
-@media (min-width: 768px) {
-  .partners-grid.is-single .partner-card {
-    flex-direction: row;
-    text-align: left;
-    gap: 1.75rem;
-    padding: 2rem 2.25rem;
-  }
+/* Logo-only cards: keep them compact so a lone partner does not stretch
+   into a wide empty band. */
+.partners-grid.is-single {
+  max-width: 22rem;
+  margin: 0 auto;
 }
 
 .partner-card--link {
@@ -1753,23 +1749,6 @@ section[id] {
 
 @media (min-width: 768px) {
   .partner-logo { height: 3.25rem; }
-}
-
-.partner-copy { min-width: 0; }
-
-.partner-name {
-  font-family: var(--font-display);
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #111827;
-  letter-spacing: -0.01em;
-}
-
-.partner-line {
-  margin-top: 0.35rem;
-  font-size: 0.9375rem;
-  line-height: 1.55;
-  color: #4b5563;
 }
 
 /* ---------- Impact stats + schools map ---------- */

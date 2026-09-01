@@ -86,13 +86,12 @@ const AppConfig = {
     improvedPassRate: '10%'
   },
 
-  // Partner brands. Add an entry to render another card; the grid reflows
-  // on its own. `line` and `url` are optional.
+  // Partner brands. Add an entry to render another logo; the grid reflows
+  // on its own. `url` is optional and turns the card into a link.
   partners: [
     {
-      name: 'Liberty Group SA',
+      name: 'Liberty Group SA',   // used as the logo's alt text
       logo: 'assets/liberty-logo.png?v=1',
-      line: 'Backing NOVAR through the #DriveHope initiative — a R1 million commitment to keep learners learning.',
       url: ''
     }
   ],
