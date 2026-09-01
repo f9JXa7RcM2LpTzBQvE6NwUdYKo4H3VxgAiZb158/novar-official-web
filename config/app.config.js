@@ -128,15 +128,13 @@ const AppConfig = {
     nav: '#main-nav',
     sponsorButton: '#sponsor-button',
     mobileMenuButton: '#mobile-menu-button',
-    mobileMenu: '#mobile-menu',
     mobileMenuOverlay: '#mobile-menu-overlay',
     backToTop: '#back-to-top',
     comingSoonModal: '#coming-soon-modal',
     closeComingSoon: '#close-coming-soon',
     iosDownloadBtn: '#ios-download-btn',
     sendEmailBtn: '#send-email-btn',
-    sendWhatsAppBtn: '#send-whatsapp-btn',
-    donateButton: '#donate-button'
+    sendWhatsAppBtn: '#send-whatsapp-btn'
   }
 };
 

@@ -9,7 +9,23 @@
  * @returns {HTMLElement|null}
  */
 export function getElementById(id) {
-  return document.getElementById(id);
+  return document.getElementById(stripHash(id));
+}
+
+/**
+ * Accepts either a bare id or a '#'-prefixed selector.
+ *
+ * config/app.config.js stores selectors with the '#' ("#ios-download-btn"),
+ * and modules passed those straight to document.getElementById, which looks
+ * for an id literally containing the '#' and silently found nothing. That
+ * left the App Store and contact buttons with no click handlers at all.
+ *
+ * @param {string} id - Element id, with or without a leading '#'
+ * @returns {string} The bare id
+ */
+export function stripHash(id) {
+  if (typeof id !== 'string') return id;
+  return id.charAt(0) === '#' ? id.slice(1) : id;
 }
 
 /**
