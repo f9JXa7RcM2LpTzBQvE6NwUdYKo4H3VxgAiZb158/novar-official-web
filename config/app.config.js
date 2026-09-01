@@ -106,21 +106,10 @@ const AppConfig = {
     // Scores stay in the data below but are not displayed. Flip to true
     // once the numbers are real and their unit is decided.
     showScores: false,
+    emptyMessage: 'To be updated',
     units: { learners: '', educators: '', schools: 'pts' },
-    learners: [
-      { rank: 1, name: 'Learner 1', detail: 'Alexandra Secondary School', score: 2480 },
-      { rank: 2, name: 'Learner 2', detail: 'Alexandra Secondary School', score: 2310 },
-      { rank: 3, name: 'Learner 3', detail: 'Alexandra Secondary School', score: 2150 },
-      { rank: 4, name: 'Learner 4', detail: 'Alexandra Secondary School', score: 1990 },
-      { rank: 5, name: 'Learner 5', detail: 'Alexandra Secondary School', score: 1870 }
-    ],
-    educators: [
-      { rank: 1, name: 'Educator 1', detail: 'Alexandra Secondary School', score: 1640 },
-      { rank: 2, name: 'Educator 2', detail: 'Alexandra Secondary School', score: 1520 },
-      { rank: 3, name: 'Educator 3', detail: 'Alexandra Secondary School', score: 1410 },
-      { rank: 4, name: 'Educator 4', detail: 'Alexandra Secondary School', score: 1280 },
-      { rank: 5, name: 'Educator 5', detail: 'Alexandra Secondary School', score: 1150 }
-    ],
+    learners: [],
+    educators: [],
     schools: [
       { rank: 1, name: 'Alexandra Secondary School', detail: 'Alexandra, Sandton', score: 8940 }
     ]

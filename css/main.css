@@ -2113,8 +2113,15 @@ section[id] {
 }
 
 .board-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 8rem;
   padding: 1.5rem;
   text-align: center;
   color: #9ca3af;
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
+  background: #f9fafb;
+  border: 1px dashed #e5e7eb;
+  border-radius: 0.65rem;
 }

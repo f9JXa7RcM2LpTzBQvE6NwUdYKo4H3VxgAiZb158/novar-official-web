@@ -77,7 +77,8 @@ class Leaderboards {
 
     const rows = Array.isArray(this.data[board]) ? this.data[board] : [];
     if (!rows.length) {
-      panel.innerHTML = '<p class="board-empty">No entries yet.</p>';
+      const message = this.data.emptyMessage || 'No entries yet.';
+      panel.innerHTML = `<p class="board-empty">${message}</p>`;
       return;
     }
 
