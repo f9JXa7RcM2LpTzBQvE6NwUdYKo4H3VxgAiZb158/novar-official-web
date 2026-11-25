@@ -7,7 +7,6 @@ import MobileMenu from './modules/MobileMenu.js?v=nav22';
 import Navigation from './modules/Navigation.js?v=nav22';
 import ScrollAnimations from './modules/ScrollAnimations.js?v=nav22';
 import BackToTop from './modules/BackToTop.js?v=nav22';
-import ComingSoonModal from './modules/ComingSoonModal.js?v=nav22';
 import ContactForm from './modules/ContactForm.js?v=nav22';
 import HeroTypewriter from './modules/HeroTypewriter.js?v=nav22';
 import HeroPhoneTour from './modules/HeroPhoneTour.js?v=nav22';
@@ -55,7 +54,6 @@ class App {
         new HeroPhoneTour(),
         new ScrollAnimations(),
         new BackToTop(),
-        new ComingSoonModal(),
         new ContactForm(),
         new SponsorLearner(),
         new SchoolsMap(),

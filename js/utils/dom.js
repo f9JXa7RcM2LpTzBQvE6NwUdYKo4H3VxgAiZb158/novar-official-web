@@ -18,7 +18,7 @@ export function getElementById(id) {
  * config/app.config.js stores selectors with the '#' ("#ios-download-btn"),
  * and modules passed those straight to document.getElementById, which looks
  * for an id literally containing the '#' and silently found nothing. That
- * left the App Store and contact buttons with no click handlers at all.
+ * left contact buttons with no click handlers at all.
  *
  * @param {string} id - Element id, with or without a leading '#'
  * @returns {string} The bare id

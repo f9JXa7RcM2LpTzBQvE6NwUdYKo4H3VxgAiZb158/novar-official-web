@@ -105,7 +105,7 @@ const AppConfig = {
     // Scores stay in the data below but are not displayed. Flip to true
     // once the numbers are real and their unit is decided.
     showScores: false,
-    emptyMessage: 'To be updated',
+    emptyMessage: 'No rankings yet',
     units: { learners: '', educators: '', schools: 'pts' },
     learners: [],
     educators: [],
@@ -130,9 +130,6 @@ const AppConfig = {
     mobileMenuButton: '#mobile-menu-button',
     mobileMenuOverlay: '#mobile-menu-overlay',
     backToTop: '#back-to-top',
-    comingSoonModal: '#coming-soon-modal',
-    closeComingSoon: '#close-coming-soon',
-    iosDownloadBtn: '#ios-download-btn',
     sendEmailBtn: '#send-email-btn',
     sendWhatsAppBtn: '#send-whatsapp-btn'
   }
